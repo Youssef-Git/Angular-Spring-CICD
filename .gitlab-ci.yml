@@ -5,7 +5,8 @@ stages:
 
 variables:
   MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode --errors --fail-at-end"
-  CHROME_BIN: "/usr/bin/chromium-browser"
+  CHROME_BIN: "/usr/bin/chromium"
+  DISPLAY: ":99"  #
 
 # Backend pipeline
 backend_build:
@@ -47,21 +48,19 @@ frontend_build:
     paths:
       - src/app/dist
 
-# frontend_test:
-#   stage: test
-#   image: node:18-buster
-#   before_script:
-#     - echo "Avant l'installation de Chromium"
-#     - apt-get update
-#     - npm install
-#     - npm install -g @angular/cli 
-#     - apt-get install -y chromium
-#     - echo "Après l'installation de Chromium"
-#     - which chromium 
-#   script:
-#     - npm run test -- --browsers=ChromeHeadless
-#   only:
-#     - main 
+frontend_test:
+  stage: test
+  image: node:18-buster  
+  before_script:
+    - apt-get update
+    - apt-get install -y chromium
+    - npm install
+    - npm install -g @angular/cli  
+  script:
+    - echo "Exécution des tests front-end avec ChromeHeadless"
+    - npm run test -- --browsers=ChromeHeadless --watch=false  
+  only:
+    - main 
 
 frontend_deploy:
   stage: deploy
