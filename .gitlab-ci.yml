@@ -1,0 +1,73 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode --errors --fail-at-end"
+  CHROME_BIN: "/usr/bin/chromium-browser"
+
+# Backend pipeline
+backend_build:
+  stage: build
+  image: maven:3.8-openjdk-17
+  script:
+    - cd src/app/Backend
+    - mvn clean package -DskipTests
+  artifacts:
+    paths:
+      - src/app/Backend/target/*.jar
+
+backend_test:
+  stage: test
+  image: maven:3.8-openjdk-17
+  script:
+    - cd src/app/Backend
+    - mvn test
+
+backend_deploy:
+  stage: deploy
+  image: openjdk:17-jdk-slim
+  script:
+    - java -jar src/app/Backend/target/*.jar
+  only:
+    - main
+
+# Frontend pipeline
+frontend_build:
+  stage: build
+  image: node:18-alpine
+  script:
+    - echo "Démarrage du build"
+    - ls -R
+    - cd src/app/components
+    - npm install
+    - npm run build --prod
+  artifacts:
+    paths:
+      - src/app/dist
+
+# frontend_test:
+#   stage: test
+#   image: node:18-buster
+#   before_script:
+#     - echo "Avant l'installation de Chromium"
+#     - apt-get update
+#     - npm install
+#     - npm install -g @angular/cli 
+#     - apt-get install -y chromium
+#     - echo "Après l'installation de Chromium"
+#     - which chromium 
+#   script:
+#     - npm run test -- --browsers=ChromeHeadless
+#   only:
+#     - main 
+
+frontend_deploy:
+  stage: deploy
+  image: node:18-alpine
+  script:
+    - cd src/app/dist
+    - npx http-server -p 4200
+  only:
+    - main
