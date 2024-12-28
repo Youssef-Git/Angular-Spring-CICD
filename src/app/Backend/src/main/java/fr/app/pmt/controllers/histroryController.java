@@ -21,7 +21,7 @@ import fr.app.pmt.models.History;
 import fr.app.pmt.services.HistoryService;
 
 @RestController
-@CrossOrigin(origins="http://localhost:4200/")
+@CrossOrigin(origins="*")
 
 public class histroryController {
 	

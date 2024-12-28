@@ -33,14 +33,14 @@ RUN apt-get update && apt-get install -y \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
-# Étape 3 : Créer un utilisateur non-root pour exécuter ChromeHeadless
-RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
-    && mkdir -p /home/pptruser/Downloads \
-    && chown -R pptruser:pptruser /home/pptruser \
-    && chown -R pptruser:pptruser /node_modules
+# # Étape 3 : Créer un utilisateur non-root pour exécuter ChromeHeadless
+# RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
+#     && mkdir -p /home/pptruser/Downloads \
+#     && chown -R pptruser:pptruser /home/pptruser \
+#     && chown -R pptruser:pptruser /node_modules
 
-# Passer à l'utilisateur non-root
-USER pptruser
+# # Passer à l'utilisateur non-root
+# USER pptruser
 
 # Étape 4 : Exposer le port pour servir l'application (si vous avez un front à tester)
 EXPOSE 4200

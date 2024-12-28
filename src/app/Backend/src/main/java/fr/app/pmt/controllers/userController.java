@@ -22,8 +22,7 @@ import fr.app.pmt.models.Users;
 import fr.app.pmt.services.UserService;
 
 @RestController
-//@RequestMapping("/utilisateur")
-@CrossOrigin(origins="http://localhost:4200/")
+@CrossOrigin(origins="*")
 
 public class userController {
 	
