@@ -1,8 +1,7 @@
-# Étape 1 : Construire l'application Angular
-FROM node:18 as build
+FROM node:18
 
 # Installer Chromium
-RUN apk add --no-cache chromium
+RUN apt-get update && apt-get install -y chromium
 
 # Définir les variables d'environnement
 ENV CHROME_BIN=/usr/bin/chromium
