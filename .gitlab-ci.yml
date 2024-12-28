@@ -46,7 +46,7 @@ frontend_build:
     - npm run build --prod
   artifacts:
     paths:
-      - src/app/dist
+      - dist
 
 frontend_test:
   stage: test
@@ -66,7 +66,7 @@ frontend_deploy:
   stage: deploy
   image: node:18-alpine
   script:
-    - cd src/app/dist
+    - cd dist
     - npx http-server -p 4200
   only:
     - main
