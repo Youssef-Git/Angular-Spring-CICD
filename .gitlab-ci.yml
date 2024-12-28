@@ -15,6 +15,7 @@ backend_build:
   script:
     - cd src/app/Backend
     - mvn clean package -DskipTests
+    - echo "Backend installed"
   artifacts:
     paths:
       - src/app/Backend/target/*.jar
@@ -39,11 +40,11 @@ frontend_build:
   stage: build
   image: node:18-alpine
   script:
-    - echo "Démarrage de build"
     - ls -R
     - cd src/app/components
     - npm install
     - npm run build --prod
+    - echo "Frontend installed"
   artifacts:
     paths:
       - dist
@@ -58,7 +59,7 @@ frontend_test:
     - npm install -g @angular/cli  
   script:
     - echo "Exécution des tests front-end avec ChromeHeadless"
-    - npm run test -- --browsers=ChromeHeadless --watch=false  
+    - npm run test -- --browsers=ChromeHeadless --watch=false --no-sandbox
   only:
     - main 
 
