@@ -59,7 +59,7 @@ frontend_test:
     - npm install -g @angular/cli  
   script:
     - echo "Exécution des tests front-end avec ChromeHeadless"
-    - npm run test -- --browsers=ChromeHeadless --watch=false  
+    - npm test
   only:
     - main 
 
