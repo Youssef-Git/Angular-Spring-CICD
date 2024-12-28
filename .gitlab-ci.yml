@@ -38,7 +38,7 @@ backend_deploy:
 # Frontend pipeline
 frontend_build:
   stage: build
-  image: node:18-alpine
+  image:  node:18-buster  
   script:
     - ls -R
     - cd src/app/components
@@ -55,11 +55,12 @@ frontend_test:
   script:
     - cd src/app/components
     - echo "Exécution des tests front-end avec ChromeHeadless"
+    - npm install --save-dev @angular/cli
     - npm test
 
 frontend_deploy:
   stage: deploy
-  image: node:18-alpine
+  image:  node:18-buster  
   script:
     - cd dist
     - npx http-server -p 4200
