@@ -1,0 +1,18 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "cSpell.words": [
+        "Addprojectform",
+        "Authguard",
+        "connexion",
+        "d'accueil",
+        "fontawesome",
+        "formulaire",
+        "formulaires",
+        "Membre",
+        "Observateur",
+        "popperjs",
+        "succès",
+        "toastr"
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
+}

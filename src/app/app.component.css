@@ -1,0 +1,62 @@
+main {
+    width: 100%;
+    height: 100%;
+    /* background-color: red; */
+
+}
+
+.conteneur-card {
+    padding: 20px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.conteneur-list-projet {
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+
+}
+
+.conteneur-card :hover {
+    transform: translateY(-5px);
+}
+
+h1 {
+    color: #007bff;
+    font-weight: bold;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+}
+
+.conteneur-button {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+
+}
+
+.faCirclePlus {
+    transition: background-color 0.2s;
+    size: 50ch;
+    color: #007bff;
+}
+
+.faArrowsRotate {
+    color: gray;
+
+}
+
+.faPenToSquare {
+    color: rgb(57, 221, 16);
+}
+
+.faTrashCan {
+    color: rgb(255, 0, 0);
+}

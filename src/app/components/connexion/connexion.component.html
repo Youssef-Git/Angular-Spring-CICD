@@ -1,0 +1,25 @@
+<form [formGroup]="loginForm" (ngSubmit)=" seConnecter()">
+    <div class="container">
+        <h1>Connection</h1>
+        <p>Veuillez remplir ce formulaire pour vous connecter.</p>
+        <hr>
+
+        <label for="Identifiant"><b>Identifiant</b></label>
+        <input formControlName="email" type="text" placeholder="Veillez saisir votre identifiant" name="identifiant" id="identifiant" required>
+
+
+        <label for="psw"><b>Mot de passe</b></label>
+        <input  formControlName="psw" type="password" placeholder="Veillez saisir votre mot de passe " name="psw" id="psw" required>
+        <div class=" connexion">
+            <a type="button"  class="mdp-oublie" >Mot de passe oublié?⚠️</a>
+        </div>
+        <hr>
+        <button type="submit" class="btn-connexion">Connection</button>
+        <p>Vous n'avez pas de compte? 
+            <a type="button"   class="btn-inscription" (click)="switchToSignIn()" >
+            ➡️Créer un nouveau compte
+        </a>
+        </p>
+    </div>
+
+</form>

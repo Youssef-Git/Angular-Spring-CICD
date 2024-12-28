@@ -1,0 +1,90 @@
+
+/* Styles global du formulaire d'affichage */
+
+.card-display-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* background-color: #f0f0f0; */
+}
+
+.contenaire-card {
+    min-height: 85vh;
+    padding: 10px;
+    
+    
+}
+
+.card {
+    border: 1px solid #0000002d;
+    border-radius: 2px;
+    margin: 5px;
+    
+
+}
+
+.card-body-display {
+    padding: 1px;
+    width: 550px;
+    
+
+}
+
+.form-group {
+    background-color: #c8c8c817;
+    padding: 5px;
+}
+
+.card-title {
+    color: rgb(91, 93, 139);
+    font-size: .8rem;
+    margin-bottom: 1px;  
+}
+
+.card-date_time {
+    color: #003;
+    font-size: .8rem;
+    margin-bottom: 1px;
+}
+
+.user-nom, .user-role{
+    margin: 1px;
+    color: rgb(91, 93, 139);
+    font-size: .8rem;
+    font-style: italic;
+}
+.user-nom-i, .user-role-i{
+   
+    color: rgb(139, 110, 91);
+    font-size: .8rem;
+}
+
+.col-1{
+    width: 10%;
+    /* background-color: red; */
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin: 10px;
+
+}
+
+.contenaire-card-display, i>p.select.statut {
+    text-align: justify;
+    padding: 10px;
+    /* background: #f1f1f155; */
+    margin: 0 2px 1px 0;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.conteneur-button {
+    display: flex;
+    margin-bottom: 1px;
+    padding-top: 5px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+

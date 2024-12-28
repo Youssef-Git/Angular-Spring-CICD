@@ -1,0 +1,88 @@
+/* Styles du bouton + d'ajout des projets */
+.btn-add-user{
+    background-color: #0000FF;
+    color: white;
+    margin: 8px auto;
+    cursor: pointer;
+    width: 350px;
+    opacity: 0.9;
+    display:flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    cursor: pointer;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 1px;
+    box-shadow: 1px 5px 8px rgba(0, 0, 0, 0.105);
+
+}
+
+.faCirclePlus.fa-2x {
+    color: #ffffff;
+    margin: 5px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.faCirclePlus.fa-3x:hover {
+    transform: translateX(-5px);
+}
+
+/* Styles du formulaire modale */
+.header-content, .footer-textarea {
+    text-align: center;
+
+}
+
+.modal-content {
+    text-align: justify;
+    margin: 4px 0 8px 0;
+    padding: 10px;
+    border: 1px solid #f1f1f1;
+    border-radius: 2px;
+    /* background-color: #0000FF; */
+}
+
+input[type=text], input[type=email], input[type=password]{
+    width: 100%;
+    padding: 12px 14px;
+    margin: 1px 0 5px 0;
+    display: inline-block;
+    background: #f1f1f1;
+    border: 1px solid #f1f1f1;
+    border-radius: 2px;
+}
+
+input[type=text]:focus, input[type=password]:focus , input[type=email]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 15px;
+}
+
+.btn-submit {
+    background-color: #0000FF;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+select[type=role] {
+    text-transform: uppercase;
+    width: 100%;
+    padding: 10px;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}

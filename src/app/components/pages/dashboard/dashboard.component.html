@@ -1,0 +1,78 @@
+<!-- Formulaire d'affichage des projets -->
+<div>
+
+    <div class="card-display-page" *ngIf="!isDisplayButton">
+        <!-- <video autoplay loop muted class="video-background">
+            <source src="assets/video.mp4" type="video/mp4">
+        </video> -->
+        <div class="conteneur-card-display" *ngFor="let project of projectList" (click)="selectProject(project)"
+            [class.selected]="project.id === selectedProject?.id">
+            <div class="card">
+                <div class="card-body-display">
+                    <div class="form-group">
+                        <h1 class="card-title">{{project.nom}}</h1>
+                        <p class="card-text">{{project.description}}</p>
+                        <i>
+                            <p class="card-text-display">{{project.statut}}</p>
+                        </i>
+                    </div>
+                    <div class="conteneur-button">
+                        <button type="button" class="btn-voir-details" (click)="cancelButton()">
+                            Voir plus...
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="conteneur-card-details  ">
+
+        <div class="conteneur-list-projet" *ngIf="isDisplayButton">
+
+            <div class="card">
+                <!-- Styles du bouton annuler -->
+                <button type="button" class="btn-annuler btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)=" cancelButton() ">
+                </button>
+                <div *ngIf="selectedProject ">
+                    <!-- Formulaire de modification des projets -->
+                    <form class="card-body-details ">
+                        <div class="form-group">
+                            <label for="nom" class="card-title">Titre</label>
+                            <input type="text" id="nom" [(ngModel)]="selectedProject.nom" name="nom"
+                                [disabled]="true" />
+
+                            <div class="form-date">
+                                <div class="col">
+                                    <label for="dateDebut"><b>Date de début</b></label>
+                                    <input type="date" id="dateDebut" [(ngModel)]="selectedProject.dateDebut"
+                                        name="dateDebut" [disabled]="true" />
+                                </div>
+                                <div class="col">
+                                    <label for="dateFin"><b>Date de fin</b></label>
+                                    <input type="date" id="dateFin" [(ngModel)]="selectedProject.dateFin" name="dateFin"
+                                        [disabled]="true" />
+                                </div>
+                            </div>
+
+                            <label for="objectif"><b>Objectif</b></label>
+                            <input type="text" id="objectif" [(ngModel)]="selectedProject.objectif" name="objectif"
+                                [disabled]="true" />
+
+                            <label for="description"><b>Description</b></label>
+                            <p id="description" name="description">{{selectedProject.description}}</p>
+
+                            <label for="status"><b>Statut</b></label>
+                            <input type="text" class="statut" [(ngModel)]="selectedProject.statut" name="statut"
+                                [disabled]="true" />
+
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

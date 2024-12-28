@@ -1,0 +1,196 @@
+
+img.image-home{
+    width: 65vh;
+    padding: 5px;
+    margin:10px 10px;
+    justify-content: left;
+}
+div.row{
+    background-color: rgb(97, 96, 255);
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 auto;
+
+}
+div.col{
+    /* background-color: rgb(247, 35, 7); */
+    height: 90%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 10px;
+}
+/* Style du formulaire de connexion  */
+/* .row-formulaire{
+    background-color: rgb(252, 32, 32);
+
+} */
+.container{
+    background-color:white;
+    width: 300px;
+    height: 40vh;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    border-radius: 1;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+}
+.container:hover{
+    border: 2px solid #ffffff;
+    transition: translateY(-5px);
+    box-shadow: 0 4px 8px black;
+
+}
+.pied-formulaire-connexion{
+    color: rgb(255, 255, 255);
+    position:absolute;
+    padding-top: 500px;
+}
+
+/* Styles du formulaire de connexion */
+
+* {
+    box-sizing: border-box
+}
+
+/* Add padding to containers */
+.container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    width: 60vh;
+    border: 1px solid #f1f1f1;
+    border-radius: 4px;
+    background-color: #ffffff;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 10px;
+}
+
+/* Set a style for the submit/register button */
+.btn-connexion {
+    background-color: #0000FF;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.registerbtn:hover {
+    opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+    color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.connexion {
+    background-color: #f1f1f1;
+    text-align: center;
+}
+
+/* Styles du formulaire d'inscription */
+
+* {
+    box-sizing: border-box
+}
+
+
+/* Add padding to containers */
+.container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    width: 70vh;
+    border: 1px solid #f1f1f1;
+    border-radius: 4px;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=login],  input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=login]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+select[type=role] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;   
+}
+option[type=text] {
+    background-color:white;
+    border: 1px solid #ff0000;
+    border-radius: 4px;
+}
+
+
+/* Overwrite default styles of hr */
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+/* Set a style for the submit/register button */
+.btn-inscription {
+    background-color: #0000FF;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.btn-inscription:hover {
+    opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+    color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.inscription {
+    background-color: #f1f1f1;
+    text-align: center;
+}

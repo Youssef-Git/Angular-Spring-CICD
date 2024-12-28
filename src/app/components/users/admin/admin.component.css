@@ -1,0 +1,69 @@
+.conteneur-admin {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+
+}
+
+.container.text-center {
+    /* background-color: red; */
+    min-height: 80vh;
+}
+
+
+.mot-de-bienvenu {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #000000;
+    margin: 20px;
+}
+
+.col-2 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    background-color: rgba(0, 64, 225, 0.135);
+    box-shadow: #000000;
+    margin: 5px auto;
+    min-width: 15vw;;
+    width: auto;
+
+}
+
+.fa-userIcon {
+    font-size: 30px;
+}
+
+.user-nom {
+    color: rgb(7, 86, 106);
+}
+
+.col-3 {
+    margin: 0 auto;
+    width: auto;
+}
+
+.button-adds {
+    background-color: #0000FF;
+    color: white;
+    margin: 8px auto;
+    cursor: pointer;
+    width: 200px;
+    opacity: 0.9;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    cursor: pointer;
+    border: none;
+    padding: 10px;
+    border-radius: 1px;
+    box-shadow: 1px 5px 8px rgba(0, 0, 0, 0.105);
+}

@@ -1,0 +1,40 @@
+<div class="row">
+    <!-- Formulaire d'affichage de bienvenu et du profile  -->
+
+    <div class="col">
+        <h1 class="mot-de-bienvenu">
+            <i>Bienvenu sur votre tableau de bord</i>
+        </h1>
+    </div>
+    <div class="col-2">
+        <div class="profile">
+        <fa-icon [icon]="faUser" class="fa-userIcon"></fa-icon>
+        <h5 class="user-nom"> {{userNom}}</h5>
+    </div>
+       <!-- Boutons lateral <<voir les historiques>> -->
+        <button type="button" class="button-historiques" (click)="onClickVoirHistorique()">
+            Voir les historiques
+        </button>
+    </div>
+ 
+</div>
+<!-- Formulaire d'affichage des projets -->
+<div class="dashboard-page">
+    <div class="contenaire-card" *ngFor=" let project of projectList; let i=index">
+        <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <h1 class="card-title">{{project.nom}}</h1>
+                    <p class="card-text">{{project.description}}</p>
+                    <i>
+                        <p class="card-text">{{project.statut}}</p>
+                    </i>
+                </div>
+                <div class="conteneur-button">
+                    <button type="button" class="btn-en-savoir-plus"> Voir les details
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

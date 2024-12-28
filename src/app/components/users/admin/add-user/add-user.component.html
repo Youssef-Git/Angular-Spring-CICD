@@ -1,0 +1,65 @@
+<!-- Formulaire de d'utilisateur -->
+<app-adduserform></app-adduserform>
+
+<!-- Formulaire d'affichage des utilisateurs -->
+<div>
+    <div class="card-display-page" *ngIf="!isButton">
+        <div class="contenaire-card-display" *ngFor="let user of userList; let i=index " (click)=selectUser(user)
+            [class.selected]="user.id === selectedUser?.id">
+            <div class="card">
+                <div class="card-body-display">
+                    <div class="form-group">
+                        <h1 class="card-title">{{user.nom}}</h1>
+                        <p class="card-text-display">E-mail: {{user.email}}</p>
+                        <i>
+                            <p class="card-text-display">Rôle: {{user.role}}</p>
+                        </i>
+                    </div>
+                    <div class="conteneur-button">
+                        <button type="button" class="btn-modifier-le-user" (click)="isDisplayButton()">
+                            ➡️ Cliquez pour modifier un utilisateur
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Formulaire de modification des utilisateurs -->
+    <div class="conteneur-card">
+        <div class="conteneur-list-user" style="width: 40vh;" *ngIf="selectedUser">
+            <div class="card">
+                <div *ngIf="isButton">
+
+                    <form class="card-body" (ngSubmit)="updateUser()">
+                        <!-- <h1 class="card-title" [(ngModel)]="selectedUser.id"></h1> -->
+                        <hr>
+                        <label for="nom"></label>
+                        <input id="nom" type="text" [(ngModel)]="selectedUser.nom" name="nom" required>
+                        <label for="email">Email</label>
+                        <input id="email" type="email" [(ngModel)]="selectedUser.email" name="email" required>
+                        <label for="role">Rôle</label>
+                        <select class="role" id="role" [(ngModel)]="selectedUser.role" name="role" required>
+                            <option value="Observateur">Observateur</option>
+                            <option value="Membre">Membre</option>
+                            <option value="Administrateur">Administrateur</option>
+                        </select>
+                        <hr>
+                        <div class="conteneur-button">
+                            <button type="button" class="btn-faArrowsRotate" (click)="updateUser()">
+                                Upload <fa-icon [icon]="faArrowsRotate" ></fa-icon>
+                            </button>
+                            <button type="button" class="btn-faTrashCan" (click)="deleteUsers()" >
+                                Delete
+                                <fa-icon [icon]="faTrashCan"></fa-icon>
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<main class="auth-control">
+    <div class="row">
+        <!-- Form de connection & inscription-->
+        <div class="col">
+            <app-connexion *ngIf="!isSignUp"></app-connexion>
+            <app-inscription *ngIf="isSignUp"></app-inscription>
+        </div>
+
+        <!-- Section image d'accueil-->
+        <div class="col">
+            <img src={{ImgHome}} class="image-home" alt="image" />
+        </div>
+    </div>
+</main>
+

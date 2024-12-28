@@ -1,0 +1,57 @@
+<main>
+
+    <!-- Bouton d'ajout d'utilisateur  -->
+    <button class="btn-add-user" data-bs-toggle="modal" data-bs-target="#formulaireModal" data-bs-whatever="">
+        Ajouter un utilisateur
+        <fa-icon class="faCirclePlus fa-2x" type="button" [icon]="faCirclePlus "></fa-icon>
+    </button>
+
+    <!-- Formulaire modal d'ajout d'utilisateur -->
+    <form class="modal fade " id="formulaireModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="header-content">
+                        <h1 class="modal-title fs-5" id="formulaireModalLabel">Créer un nouvel utilisateur</h1>
+                    </div>
+                    <hr>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                        <p>Veuillez remplir ce formulaire pour créer un utilisateur.</p>
+                        <div class="mb-3">
+                            <label for="nom" class="form-label"><b>Noms</b> </label>
+                            <input type="text" id="nom" class="form-control" formControlName="nom"
+                                placeholder="Saisir le nom et prénom" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label"><b>E-mail</b></label>
+                            <input type="email" id="email" class="form-control" formControlName="email"
+                                placeholder="Veiller saisir l'e-mail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label"><b>Mot de passe </b> </label>
+                            <input type="password" id="password" class="form-control" formControlName="password"
+                                placeholder="Veiller saisir un mot de passe" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="repassword" class="form-label"><b>Confirmer le mot passe </b></label>
+                            <input type="password" id="repassword" class="form-control" formControlName="repassword"
+                                placeholder="Veiller confirmer le mot de passe" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="role" class="form-label"><b>Rôle</b></label>
+                            <select type="role" id="role" required formControlName="role">
+                                <option value="Observateur">Observateur</option>
+                                <option value="Membre">Membre</option>
+                                <option value="Administrateur">Administrateur</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-submit" >Ajouter</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>

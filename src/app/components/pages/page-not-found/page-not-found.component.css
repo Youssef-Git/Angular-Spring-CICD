@@ -1,0 +1,21 @@
+div.page-not-found{
+    height: 100vh;
+    background-color: #f0f0f0;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.erreur-404{
+    color: #333;
+    font-size: 18vh;
+    font-weight: 900;
+}
+
+.redirection{
+    color: #333;
+}
+a[type="button"]{
+    color: rgb(0, 162, 255);
+
+}

@@ -1,0 +1,163 @@
+
+/* Styles global du formulaire d'affichage */
+
+.card-display-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+   
+}
+
+.contenaire-card {
+    height: max-content;
+    padding: 10px;   
+
+}
+
+.card {
+    border: 1px solid #0000002d;
+    border-radius: 2px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.card-body-display {
+    padding: 10px;
+    width: 340px;
+
+}
+
+.form-group {
+    background-color: #c8c8c817;
+    padding: 5px;
+}
+
+.card-title {
+    color: #003;
+    font-weight: bold;
+    font-size: 1.20rem;
+    margin-bottom: 1px;
+    text-align: center;
+
+}
+
+.contenaire-card-display, i>p.select.statut {
+    text-align: justify;
+    padding: 10px;
+    margin: 0 2px 1px 0;
+    font-size: 1rem;
+    color: #666;
+
+}
+
+.conteneur-button {
+    display: flex;
+    margin-bottom: 1px;
+    padding-top: 5px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-modifier-le-user {
+    width: 100%;
+    background-color: #0000FF;
+    color: white;
+    padding: 5px;
+    border: 1px solid #f1f1f1;
+    border-radius: 2px;
+    box-shadow: 1px 5px 8px rgba(0, 0, 0, 0.105);
+}
+
+/* Styles global de la carte */
+.conteneur-card {
+    text-align: justify;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+/* Styles de la carte */
+.card {
+    border: 1px solid #0000002d;
+    border-radius: 2px;
+    width: 100%;
+}
+
+/* Styles de la largeur et du décalage de la carte */
+.card-body{
+    padding: 20px;
+}
+
+
+
+/* Styles des paragraphes, select et input */
+input[type=text], input[type=email],  select.role{
+    width: 100%;
+    padding: 5px;
+    margin: 0 10px 1px 0;
+    display: flex;
+    border: 1px solid #0000002d;
+    border-radius: 2px;
+    background: #f1f1f155;
+    
+}
+input[type=text]:focus, input[type=email]:focus, select.role:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+select>option{
+    padding: 20px;
+    text-align: justify;
+    margin: 0 2px 1px 0;
+    background-color: #ffffff;
+    border: 1px solid #0000002d;
+    border-radius: 2px;
+}
+select>option:hover{
+    cursor: pointer;
+    border: none;
+    background-color: #0000FF;
+}
+
+/* Styles des boutons et icones */
+.conteneur-button {
+    display: flex;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.btn-faTrashCan {
+    background-color: red;
+    color: white;
+    cursor:pointer;
+    padding: 5px ;
+    border: 1px solid #f1f1f1;
+    border-radius: 2px;
+    box-shadow: 1px 5px 8px rgba(0, 0, 0, 0.105);
+}
+
+.btn-faArrowsRotate{
+    background-color: #0000FF;
+    color: white;
+    cursor:pointer;
+    padding: 5px ;
+    border: 1px solid #f1f1f1;
+    border-radius: 2px;
+    box-shadow: 1px 5px 8px rgba(0, 0, 0, 0.105);
+}
+
+
+
+

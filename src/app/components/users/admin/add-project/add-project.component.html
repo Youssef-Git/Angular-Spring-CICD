@@ -1,0 +1,89 @@
+<app-modal></app-modal>
+
+<!-- Formulaire d'affichage des projets -->
+<div>
+    <div class="card-display-page" *ngIf="!isDisplayCard">
+        <div class="contenaire-card-display" *ngFor="let project of projectList" (click)="selectProject(project)"
+            [class.selected]="project.id === selectedProject?.id">
+            <div class="card">
+                <div class="card-body-display">
+                    <div class="form-group">
+                        <h1 class="card-title">{{project.nom}}</h1>
+                        <p class="card-text-display">{{project.description}}</p>
+                        <i>
+                            <p class="card-text-display">{{project.statut}}</p>
+                        </i>
+                    </div>
+                    <div class="conteneur-button">
+                        <button type="button" class="btn-modifier-le-projet ">
+                            Modifier <fa-icon [icon]="faPenToSquare"></fa-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="conteneur-card-update">
+        <div class="conteneur-list-projet">
+            <div class="card">
+                <div *ngIf="selectedProject ">
+                    <!-- Formulaire de modification des projets -->
+                    <form (ngSubmit)="updateProject()" class="card-body">
+                        <hr>
+                        <div class="form-group">
+                            <label for="nom" class="card-title">Nom</label>
+                            <input type="text" id="nom" [(ngModel)]="selectedProject.nom" name="nom" required />
+
+                            <div class="form-date">
+                                <div class="col">
+                                    <label for="dateDebut"><b>Date de début</b></label>
+                                    <input type="date" id="dateDebut" [(ngModel)]="selectedProject.dateDebut"
+                                        name="dateDebut" required />
+                                </div>
+                                <div class="col">
+                                    <label for="dateFin"><b>Date de fin</b></label>
+                                    <input type="date" id="dateFin" [(ngModel)]="selectedProject.dateFin" name="dateFin"
+                                        required />
+                                </div>
+                            </div>
+
+                            <label for="objectif"><b>Objectif</b></label>
+                            <input type="text" id="objectif" [(ngModel)]="selectedProject.objectif" name="objectif"
+                                required />
+
+                            <label for="description"><b>Description</b></label>
+                            <textarea id="description" [(ngModel)]="selectedProject.description"
+                                name="description"></textarea>
+
+                            <label for="status"><b>Statut</b></label>
+                            <select class="statut" [(ngModel)]="selectedProject.statut" name="statut">
+                                <option value="En cours">En cours</option>
+                                <option value="Terminé">Terminé</option>
+                                <option value="À venir">À venir</option>
+                            </select>
+                        </div>
+
+                        <hr>
+
+
+                        <div class="contente-button">
+
+                            <button class="btn-save" type="submit" (click)=" editingCard() ">
+                                Save <fa-icon [icon]="faPenToSquare"></fa-icon>
+                            </button>
+                            <button type="button" class="btn-annule">
+                                Annuler
+                            </button>
+                            <button type="button" class="btn-faTrashCan" (click)="deleteProject()">
+
+                                Delete <fa-icon [icon]="faTrashCan"></fa-icon>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

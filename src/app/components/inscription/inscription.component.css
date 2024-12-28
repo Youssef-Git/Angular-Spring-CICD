@@ -1,0 +1,85 @@
+* {
+    box-sizing: border-box
+}
+
+.btn-connexion{
+    background-color: none;
+    color: dodgerblue;
+    border:none;
+    text-decoration: none;
+}
+
+/* Add padding to containers */
+.container {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    padding: 20px;
+    width: 60vh;
+    border: 1px solid #f1f1f1;
+    border-radius: 2px;
+    background-color: #ffffff;
+}
+
+/*Titre*/
+
+h1{
+    text-align: center;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=login],  input[type=password], select[type=role]  {
+    width: 100%;
+    padding: 10px;
+    background: #f1f1f155;
+    margin: 0 2px 1px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid #0000002d;
+    border-radius: 2px;
+}
+input[type=text]:focus, input[type=login]:focus, input[type=password]:focus, select[type=role]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+option[type=text] {
+    background-color:white;
+    border: 1px solid #ff0000;
+    border-radius: 4px;
+}
+
+
+/* Overwrite default styles of hr */
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 15px;
+}
+
+/* Set a style for the submit/register button */
+.btn-inscription {
+    background-color: #0000FF;
+    color: white;
+    padding: 12px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.btn-inscription:hover {
+    opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+    color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.inscription {
+    background-color: #f1f1f1;
+    text-align: center;
+}

@@ -1,0 +1,283 @@
+
+.row{
+    width: 100%;
+}
+.col{
+    text-align: center;
+    text-transform: uppercase;
+    margin: 20px;
+
+}
+.mot-de-bienvenu {
+    font-weight: bold;
+    color: #000000;
+
+}
+.fa-userIcon {
+    font-size: 30px;
+}
+
+.user-nom {
+    color: rgb(7, 86, 106);
+}
+.col-2 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    margin:  auto;
+    width: auto;
+
+}
+
+
+.profile{
+    justify-content: center;
+    box-shadow: #000000;
+    margin: 30px auto;
+    padding: 5px;
+    min-width: 15vw;
+    background-color: rgba(0, 64, 225, 0.135); 
+}
+
+
+.button-historiques {
+    background-color: #0000FF;
+    color: white;
+    opacity: 0.9;
+    font-size: large;
+    cursor: pointer;
+    border: none;
+    border-radius: 1px;
+    box-shadow: 1px 5px 8px rgba(0, 0, 0, 0.105);
+}
+
+/* Styles global de la carte */
+
+.card-display-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+.contenaire-card {
+    height: max-content;
+    padding: 10px;
+    
+
+}
+
+.card {
+    border: 1px solid #0000002d;
+    border-radius: 2px;
+    padding: 5px;
+    margin: 5px;
+    
+
+}
+
+.card-body-display {
+    padding: 10px;
+    width: 340px;
+
+}
+
+.form-group {
+    background-color: #c8c8c817;
+    padding: 5px;
+}
+
+.card-title {
+    color: #003;
+    font-weight: bold;
+    font-size: 1.20rem;
+    margin-bottom: 1px;
+    text-align: center;
+
+}
+
+.contenaire-card-display, i>p.select.statut {
+    text-align: justify;
+    padding: 10px;
+    background: #f1f1f155;
+    margin: 0 2px 1px 0;
+    font-size: 1rem;
+    color: #666;
+    cursor: pointer;
+    
+
+}
+
+.conteneur-button {
+    display: flex;
+    margin-bottom: 1px;
+    padding-top: 5px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-modifier-le-projet {
+    width: 100%;
+    background-color: #0000FF;
+    color: white;
+    cursor: none;
+    padding: 5px;
+    border: 1px solid #f1f1f1;
+    border-radius: 2px;
+    box-shadow: 1px 5px 8px rgba(0, 0, 0, 0.105);
+}
+
+
+
+/* Styles global de la carte */
+.conteneur-card-update {
+    text-align: justify;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.conteneur-list-projet {
+    height: max-content;
+    padding: 10px;
+}
+
+/* Styles de la carte */
+.card {
+    border: 1px solid #0000002d;
+    border-radius: 2px;
+}
+
+/* Styles de la largeur et du décalage du formulaire de modification */
+.card-body {
+    padding: 20px;
+    width: 440px;
+}
+
+
+.card-title {
+    color: #003;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Styles dates */
+.form-date {
+    display: flex;
+    gap: 10px;
+    
+}
+
+/* Styles des paragraphes, select et input */
+input[type=text], input[type=date], select, textarea {
+    width: 100%;
+    padding: 5px;
+    margin: 0 2px 1px 0;
+    display: flex;
+    border: 1px solid #0000002d;
+    border-radius: 2px;
+
+}
+
+input[type=text] :focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+
+.form-label {
+    color: rgb(0, 0, 0);
+    margin-bottom: 5px;
+}
+
+
+/* Styles des texts */
+.card-text, p {
+    font-size: 1rem;
+    color: #666;
+}
+
+
+/* Styles des boutons et icones */
+.conteneur-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: red; */
+}
+
+.contente-button {
+    display: flex;
+    gap: 10px;
+    /* background-color: red; */
+}
+
+.btn-faTrashCan {
+    width: 8vw;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 2px;
+    box-shadow: 1px 5px 8px rgba(0, 0, 0, 0.105);
+}
+
+.btn-edit {
+    width: 8vw;
+    background-color: #00d42a;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 2px;
+    box-shadow: 1px 5px 8px rgba(0, 0, 0, 0.105);
+}
+
+.btn-save {
+    background-color: #00c3ff;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    width: 8vw;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 2px;
+    box-shadow: 1px 5px 8px rgba(0, 0, 0, 0.105);
+}
+
+.btn-annule {
+    background-color: #ffae00;
+    color: white;
+    cursor:pointer;
+    padding: 5px ;
+    width: 8vw;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 2px;
+    box-shadow: 1px 5px 8px rgba(0, 0, 0, 0.105);
+}
+
+.btn-faArrowsRotate {
+    width: 100px;
+    background-color: #0000FF;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #f1f1f1;
+    border-radius: 2px;
+    box-shadow: 1px 5px 8px rgba(0, 0, 0, 0.105);
+}
+
+@media screen and (max-width: 750px) {
+    col-2 {
+        background-color: red;
+    }
+}

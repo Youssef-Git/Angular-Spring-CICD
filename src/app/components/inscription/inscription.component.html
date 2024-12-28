@@ -1,0 +1,41 @@
+
+
+<form [formGroup]="userForm" (ngSubmit)=" sInscrire()">
+    <div class="container">
+        <h1>Inscription</h1>
+        <hr>
+
+        <label for="nom"><b>Nom et Prénom</b></label>
+        <input id="nom" formControlName="nom" type="text" placeholder="Veillez saisir votre nom et prénom" required>
+        <label for="email"><b>Email</b></label>
+        <input id="email" formControlName="email" type="text" placeholder="Veillez saisir votre e-mail" required>
+
+        <label for="role"><b>Rôle</b></label>
+        <select type="role" id="select" required formControlName="role">
+            <option value="Observateur">
+                Observateur
+            </option>
+            <option value="Membre">
+                Membre
+            </option>
+            <option value="Administrateur">
+                Administrateur
+            </option>
+        </select>
+
+        <label for="password"><b>Mot de passe </b></label>
+        <input id="password" formControlName="password" type="password" placeholder="Veillez saisir votre mot de passe"
+            required>
+
+        <label for="repassword"><b>Confirmer votre mot de passe</b></label>
+        <input id="repassword" formControlName="repassword" type="password"
+            placeholder="Veillez confirmer votre mot de passe" required>
+        <p> En soumettant ce formulaire, vous consentez à notre politique de confidentialité⚠️</p>
+        <hr>
+        <button type="submit" class="btn-inscription">Inscription</button>
+        <p>Vous avez déja un compte? <a type="button"   class="btn-connexion"  (click)="switchToLogin()"> ➡️Se connecter</a>
+        </p>
+    </div>
+
+
+</form>

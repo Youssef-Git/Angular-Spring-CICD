@@ -1,0 +1,113 @@
+<div class="row">
+
+
+    <!-- Formulaire d'affichage de bienvenu et du profile  -->
+
+    <div class="col">
+        <app-modal></app-modal>
+        <h1 class="mot-de-bienvenu">
+            <i>Bienvenu sur votre tableau de bord</i>
+        </h1>
+    </div>
+    <div class="col-2">
+        <div class="profile">
+            <fa-icon [icon]="faUser" class="fa-userIcon"></fa-icon>
+            <h5 class="user-nom"> {{userNom}}</h5>
+        </div>
+        <!-- Boutons lateral <<voir les historiques>> -->
+        <button type="button" class="button-historiques" (click)="onClickVoirHistorique()">
+            Voir les historiques
+        </button>
+    </div>
+
+</div>
+
+<!-- Formulaire d'affichage des projets -->
+<div>
+    <div class="card-display-page" *ngIf="!isDisplayCard">
+        <div class="contenaire-card-display" *ngFor="let project of projectList" (click)="selectProject(project)"
+            [class.selected]="project.id === selectedProject?.id">
+            <div class="card">
+                <div class="card-body-display">
+                    <div class="form-group">
+                        <h1 class="card-title">{{project.nom}}</h1>
+                        <p class="card-text-display">{{project.description}}</p>
+                        <i>
+                            <p class="card-text-display">{{project.statut}}</p>
+                        </i>
+                    </div>
+                    <div class="conteneur-button">
+                        <button type="button" class="btn-modifier-le-projet" (click)="saveButton()">
+                            Cliquez pour modifier le projet
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="conteneur-card-update">
+        <div class="conteneur-list-projet">
+            <div class="card">
+                <div *ngIf="selectedProject ">
+
+                    <!-- Formulaire de modification des projets -->
+                    <form (ngSubmit)="updateProject()" class="card-body">
+                        <hr>
+                        <div class="form-group">
+                            <label for="nom" class="card-title">Nom</label>
+                            <input type="text" id="nom" [(ngModel)]="selectedProject.nom" name="nom" required />
+
+                            <div class="form-date">
+                                <div class="col">
+                                    <label for="dateDebut"><b>Date de début</b></label>
+                                    <input type="date" id="dateDebut" [(ngModel)]="selectedProject.dateDebut"
+                                        name="dateDebut" required />
+                                </div>
+                                <div class="col">
+                                    <label for="dateFin"><b>Date de fin</b></label>
+                                    <input type="date" id="dateFin" [(ngModel)]="selectedProject.dateFin" name="dateFin"
+                                        required />
+                                </div>
+                            </div>
+
+                            <label for="objectif"><b>Objectif</b></label>
+                            <input type="text" id="objectif" [(ngModel)]="selectedProject.objectif" name="objectif"
+                                required />
+
+                            <label for="description"><b>Description</b></label>
+                            <textarea id="description" [(ngModel)]="selectedProject.description"
+                                name="description"></textarea>
+
+                            <label for="status"><b>Statut</b></label>
+                            <select class="statut" [(ngModel)]="selectedProject.statut" name="statut">
+                                <option value="En cours">En cours</option>
+                                <option value="Terminé">Terminé</option>
+                                <option value="À venir">À venir</option>
+                            </select>
+                        </div>
+                        <hr>
+                        <div class="conteneur-button">
+                            <div class="contente-button" *ngIf="!isDisplayButton">
+                                <button type="button" class="btn-edit" (click)="saveButton()">
+                                    Edit <fa-icon [icon]="faPenToSquare"></fa-icon>
+                                </button>
+                                <button type="button" class="btn-faTrashCan">
+                                    Delete <fa-icon [icon]="faTrashCan"></fa-icon>
+                                </button>
+                            </div>
+                            <div class="contente-button" *ngIf="isDisplayButton">
+                                <button type="submit" class="btn-save" (click)="editingCard()">
+                                    Save <fa-icon [icon]="faPenToSquare"></fa-icon>
+                                </button>
+                                <button type="button" class="btn-annule" *ngIf="isDisplayCard" (click)=" cancelEdit() ">
+                                    Annuler
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

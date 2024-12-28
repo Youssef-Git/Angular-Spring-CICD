@@ -1,0 +1,31 @@
+<!-- Formulaire d'affichage des projets -->
+<div class="contenaire-card ">
+    <div class="card-display-page">
+        <div class="contenaire-card-display" *ngFor="let history of projectHistory">
+            <div class="card">
+                <div class="card-body-display">
+                    <div class="form-group row">
+                        <div class="col">
+                            <p class="card-title"><i>{{history.action}}</i></p>
+                            <p class="user-nom">
+                                Auteur:
+                                <i class="user-nom-i">{{history.username}}</i>
+                            </p>
+                        </div>
+                        <div class="col-3">
+                            <p class="card-date_time"><i>{{history.dateHistory }}</i></p>
+                            <p class="user-role">
+                                Rôle:
+                                <i class="user-role-i">{{history.role}}</i>
+                            </p>
+                        </div>
+                        <p type="button" class="col-1" (click)="deleteHistory(history.id)">
+                            <fa-icon [icon]="faTrash"></fa-icon>
+                        </p>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
