@@ -39,7 +39,7 @@ frontend_build:
   stage: build
   image: node:18-alpine
   script:
-    - echo "Démarrage du build"
+    - echo "Démarrage de build"
     - ls -R
     - cd src/app/components
     - npm install
