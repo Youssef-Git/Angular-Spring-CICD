@@ -52,14 +52,17 @@ frontend_build:
 
 frontend_test:
   stage: test
-  image: cypress/included:12.0.0  
+  image: node:18-buster  
   script:
-    - cd src/app/components  
-    - npm install --save-dev @angular/cli  
-    - npm test 
-  artifacts:
-    paths:
-      - cypress/results 
+    - cd src/app/components
+    - apt-get update && apt-get install -y chromium xvfb
+    - export CHROME_BIN=/usr/bin/chromium
+    - export DISPLAY=:99
+    - Xvfb :99 -ac &
+    - echo "Exécution des tests front-end avec ChromeHeadless"
+    - npm install --save-dev @angular/cli
+    - npm test
+    
 frontend_deploy:
   stage: deploy
   image: node:18-buster  
