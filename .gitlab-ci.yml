@@ -55,6 +55,7 @@ frontend_test:
   image: node:18-buster
   variables:
     PROJECT_DIR: /project  # Chemin vers le répertoire contenant le package.json
+    CHROME_BIN: /usr/bin/chromium  # Définit explicitement le chemin de Chrome
   script:
     # Créez un utilisateur non-root
     - useradd -m testuser
@@ -68,6 +69,7 @@ frontend_test:
 
     # Installez Chromium et Xvfb
     - apt-get update && apt-get install -y chromium xvfb
+    - which chromium || echo "Chromium n'est pas installé correctement !" && exit 1
     - export CHROME_BIN=/usr/bin/chromium
     - export DISPLAY=:99
     - Xvfb :99 -ac &
@@ -78,6 +80,7 @@ frontend_test:
     - npm ci  # Utilisez 'npm ci' pour des installations reproductibles
     - ls -l $PROJECT_DIR/package.json
     - su - testuser -c "cd $PROJECT_DIR && npm test"
+
 
 
 
