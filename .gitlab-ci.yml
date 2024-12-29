@@ -52,18 +52,23 @@ frontend_build:
 
 frontend_test:
   stage: test
-  image: node:18-buster  
+  image: node:18-buster
   script:
     - cd src/app/components
+    # Créez un utilisateur non-root
+    - useradd -m testuser
+    - export HOME=/home/testuser
+    - chown -R testuser:testuser /home/testuser
+    # Installez Chromium et Xvfb
     - apt-get update && apt-get install -y chromium xvfb
     - export CHROME_BIN=/usr/bin/chromium
     - export DISPLAY=:99
     - Xvfb :99 -ac &
     - echo "Exécution des tests front-end avec ChromeHeadless"
     - npm install --save-dev @angular/cli
-    # Ajoutez l'option --no-sandbox pour Chromium
-    - CHROME_FLAGS="--no-sandbox --headless --disable-gpu --remote-debugging-port=9222"
-    - npm test 
+    # Exécutez les tests en tant qu'utilisateur non-root
+    - su - testuser -c "npm test"
+
 
 
 frontend_deploy:
