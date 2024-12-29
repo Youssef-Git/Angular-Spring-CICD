@@ -38,9 +38,8 @@ backend_deploy:
 # Frontend pipeline
 frontend_build:
   stage: build
-  image: node:18-buster
+  image: cypress/base:18
   script:
-    - ls -R
     - cd src/app/components
     - npm install
     - npm run build --prod
@@ -51,29 +50,24 @@ frontend_build:
 
 frontend_test:
   stage: test
-  image: node:18-buster
+  image: cypress/base:18
   variables:
     PROJECT_DIR: /project
   script:
-    # Création d'un utilisateur non-root
+    # Création et préparation du projet
     - useradd -m testuser
     - export HOME=/home/testuser
     - mkdir -p $PROJECT_DIR
     - chown -R testuser:testuser $PROJECT_DIR
-
-    # Préparation des fichiers du projet
     - mv * $PROJECT_DIR || true
     - cd $PROJECT_DIR
 
-    # Installation de Chromium et configuration
-    - apt-get update && apt-get upgrade -y && apt-get install -y chromium xvfb
-    - if ! which chromium; then echo "Chromium n'est pas installé correctement !" && exit 1; fi
-    - export CHROME_BIN=$(which chromium)  # Mise à jour dynamique de CHROME_BIN
-    - export DISPLAY=:99
-    - Xvfb :99 -ac &
-
     # Vérification de Chromium
+    - if ! which chromium; then echo "Chromium n'est pas installé correctement !" && exit 1; fi
+    - export CHROME_BIN=$(which chromium)
+    - export DISPLAY=:99
     - chromium --version || { echo "Chromium n'a pas pu être lancé !" && exit 1; }
+    - Xvfb :99 -ac &
 
     # Installation et exécution des tests
     - echo "Exécution des tests front-end avec ChromeHeadless"
@@ -83,7 +77,7 @@ frontend_test:
 
 frontend_deploy:
   stage: deploy
-  image: node:18-buster
+  image: cypress/base:18
   script:
     - cd dist
     - npx http-server -p 4200
