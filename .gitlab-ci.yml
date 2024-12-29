@@ -68,8 +68,8 @@ frontend_test:
     - npm install --save-dev @angular/cli
     - npm install 
     # Exécutez les tests en tant qu'utilisateur non-root
-    - ls -l /projet-pmt/package.json 
-    - su - testuser -c "cd /build && npm test"
+    - ls -l ./package.json 
+    - su - testuser -c "cd ./ && npm test"
 
 
 
