@@ -6,7 +6,6 @@ stages:
 variables:
   NODE_ENV: "ci"
   MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode --errors --fail-at-end"
-  CHROME_BIN: "/usr/bin/chromium"
   DISPLAY: ":99"
 
 # Backend pipeline
@@ -54,6 +53,10 @@ frontend_test:
   stage: test
   image: node:18-buster
   script:
+  - cd src/app/components
+  - echo "Exécution des tests front-end avec ChromeHeadless"
+  - npm install --save-dev @angular/cli
+  - npm ci
   - npm test
 
 
