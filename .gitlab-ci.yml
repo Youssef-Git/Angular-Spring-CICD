@@ -54,30 +54,28 @@ frontend_test:
   stage: test
   image: node:18-buster
   variables:
-    PROJECT_DIR: /project  # Chemin vers le répertoire contenant le package.json
-    CHROME_BIN: /usr/bin/chromium  # Définit explicitement le chemin de Chrome
+    PROJECT_DIR: /project  
+ 
   script:
-    # Créez un utilisateur non-root
+  
     - useradd -m testuser
     - export HOME=/home/testuser
     - mkdir -p $PROJECT_DIR
     - chown -R testuser:testuser $PROJECT_DIR
 
-    # Déplacez les fichiers vers le bon répertoire (au besoin)
     - mv * $PROJECT_DIR || true
     - cd $PROJECT_DIR
 
-    # Installez Chromium et Xvfb
-    - apt-get update && apt-get install -y chromium xvfb
+    - apt-get update && apt-get install -y chromium
     - which chromium || echo "Chromium n'est pas installé correctement !" && exit 1
     - export CHROME_BIN=/usr/bin/chromium
     - export DISPLAY=:99
     - Xvfb :99 -ac &
 
-    # Installation des dépendances et tests
+
     - echo "Exécution des tests front-end avec ChromeHeadless"
     - npm install --save-dev @angular/cli
-    - npm ci  # Utilisez 'npm ci' pour des installations reproductibles
+    - npm ci  
     - ls -l $PROJECT_DIR/package.json
     - su - testuser -c "cd $PROJECT_DIR && npm test"
 
