@@ -13,6 +13,7 @@ describe('AuthComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AuthComponent, ToastrModule.forRoot() ],
+      providers: [AuthService],
       
   
     })
