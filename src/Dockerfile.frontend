@@ -5,10 +5,12 @@ FROM node:18-buster as build
 WORKDIR /app
 
 # Copier package.json et package-lock.json (ou yarn.lock) pour installer les dépendances
-COPY src/app/components/package*.json ./
+COPY . . 
 
-# Installer les dépendances du projet
 RUN npm install
+
+RUN apk add chromium
+ENV CHROME_BIN='/usr/bin/chromium-browser'
 
 # Copier le reste des fichiers du projet
 COPY src/app/components /app
