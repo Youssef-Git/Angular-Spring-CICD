@@ -66,8 +66,10 @@ frontend_test:
     - mv * $PROJECT_DIR || true
     - cd $PROJECT_DIR
 
-    - apt-get update && apt-get install -y chromium
-    - which chromium || echo "Chromium n'est pas installé correctement !" && exit 1
+    - apt-get update && apt-get install -y chromium xvfb
+    - if ! which chromium; then echo "Chromium n'est pas installé correctement !" && exit 1; fi
+    - chromium --version || { echo "Chromium n'a pas pu être lancé !" && exit 1; }
+
     - export CHROME_BIN=/usr/bin/chromium
     - export DISPLAY=:99
     - Xvfb :99 -ac &
