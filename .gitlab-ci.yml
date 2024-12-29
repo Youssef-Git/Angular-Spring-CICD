@@ -63,7 +63,7 @@ frontend_test:
     - npm install --save-dev @angular/cli
     # Ajoutez l'option --no-sandbox pour Chromium
     - CHROME_FLAGS="--no-sandbox --headless --disable-gpu --remote-debugging-port=9222"
-    - npm test -- --no-sandbox
+    - npm test 
 
 
 frontend_deploy:
