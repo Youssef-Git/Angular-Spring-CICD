@@ -1,1 +1,0 @@
-<!-- Dans le terminal, lancer <<npm run start>></npm> pour lancer le projet et les test en une seule cli -->

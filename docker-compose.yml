@@ -1,0 +1,62 @@
+version: "3.8"  # Définir la version du schema Docker Compose
+
+volumes:
+  my.cnf:
+    driver: local
+
+networks:
+  spring-boot-mysql-network:
+    name: spring-boot-mysql-network
+
+services:
+  mysqldb:
+    image: mysql:lts
+    container_name: mysqldb
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_DATABASE: donnees
+      MYSQL_USER: usr
+      MYSQL_PASSWORD: 38rm22L6y+D2YmMnGaYrwgdIHqCcsEaYJRRNzqGq4vA=
+      MYSQL_ROOT_PASSWORD: Kv/MyBclvuWZt3B0bupIOEGf9yio0Ykviz5omr/QlfQ=
+    networks:
+      - spring-boot-mysql-network
+    volumes:
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      retries: 5
+      interval: 3s
+      timeout: 30s
+
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+    container_name: angular-frontend
+    ports:
+      - "4200:80"
+    #command: ["npm", "start"]
+    networks:
+      - spring-boot-mysql-network
+
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    container_name: spring-boot-backend
+    ports:
+      - "8081:8081"
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/donnees
+      SPRING_DATASOURCE_USERNAME: usr
+      SPRING_DATASOURCE_PASSWORD: 38rm22L6y+D2YmMnGaYrwgdIHqCcsEaYJRRNzqGq4vA=
+    networks:
+      - spring-boot-mysql-network
+    volumes:
+      - ./backend-logs:/app/logs
