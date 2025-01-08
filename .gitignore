@@ -1,5 +1,7 @@
 node_modules/
 dist/
 target/
+.angular/
 .angular/cache/
+*.pack
 .env
