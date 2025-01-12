@@ -1,0 +1,91 @@
+variables:
+  GOOGLE_PROJECT_ID: "peak-lattice-447302-b9"  # Remplacez par votre ID de projet
+  GOOGLE_COMPUTE_ZONE: "europe-west1-b"    # Vous pouvez garder cette zone ou la changer
+  SPRING_IMAGE_NAME: "gcr.io/${GOOGLE_PROJECT_ID}/spring-backend:${CI_COMMIT_SHA}"
+  ANGULAR_IMAGE_NAME: "gcr.io/${GOOGLE_PROJECT_ID}/angular-frontend:${CI_COMMIT_SHA}"
+
+stages:
+  - build
+  - test
+  - docker
+  - deploy
+
+# Backend jobs
+build-backend:
+  stage: build
+  image: maven:3.8.7-openjdk-18
+  script:
+    - cd src/app/Backend
+    - mvn clean package -DskipTests
+  artifacts:
+    paths:
+      - src/app/Backend/target/*.jar
+
+test-backend:
+  stage: test
+  image: maven:3.8.7-openjdk-18
+  script:
+    - cd src/app/Backend
+    - mvn test
+
+docker-backend:
+  stage: docker
+  image: docker:stable
+  services:
+    - docker:dind
+  before_script:
+    - echo $GOOGLE_CLOUD_KEY > /tmp/google-cloud-key.json
+    - gcloud auth activate-service-account --key-file /tmp/google-cloud-key.json
+    - gcloud config set project $GOOGLE_PROJECT_ID
+    - gcloud auth configure-docker
+  script:
+    - cd src/app
+    - docker build -t $SPRING_IMAGE_NAME -f Backend/Dockerfile .
+    - docker push $SPRING_IMAGE_NAME
+
+# Frontend jobs
+build-frontend:
+  stage: build
+  image: node:latest
+  script:
+    - cd src/app/Frontend
+    - npm ci
+    - npm run build --configuration=production
+  artifacts:
+    paths:
+      - src/app/Frontend/dist/
+
+test-frontend:
+  stage: test
+  image: node:latest
+  script:
+    - cd src/app/Frontend
+    - npm ci
+    - npm run test -- --watch=false --browsers=ChromeHeadless
+
+docker-frontend:
+  stage: docker
+  image: docker:stable
+  services:
+    - docker:dind
+  before_script:
+    - echo $GOOGLE_CLOUD_KEY > /tmp/google-cloud-key.json
+    - gcloud auth activate-service-account --key-file /tmp/google-cloud-key.json
+    - gcloud config set project $GOOGLE_PROJECT_ID
+    - gcloud auth configure-docker
+  script:
+    - cd src/app/Frontend
+    - docker build -t $ANGULAR_IMAGE_NAME .
+    - docker push $ANGULAR_IMAGE_NAME
+
+deploy:
+  stage: deploy
+  image: google/cloud-sdk
+  script:
+    - echo $GOOGLE_CLOUD_KEY > /tmp/google-cloud-key.json
+    - gcloud auth activate-service-account --key-file /tmp/google-cloud-key.json
+    - gcloud config set project $GOOGLE_PROJECT_ID
+    - gcloud config set compute/zone $GOOGLE_COMPUTE_ZONE
+    # Ajoutez ici vos commandes de déploiement spécifiques pour Cloud Run :
+    - gcloud run deploy spring-backend --image $SPRING_IMAGE_NAME --platform managed --region europe-west1 --allow-unauthenticated
+    - gcloud run deploy angular-frontend --image $ANGULAR_IMAGE_NAME --platform managed --region europe-west1 --allow-unauthenticated
