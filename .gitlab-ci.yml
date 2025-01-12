@@ -26,7 +26,12 @@ test-backend:
   image: maven:3.8.7-openjdk-18
   script:
     - cd src/app/Backend
-    - mvn test
+    - mvn test -X
+  artifacts:
+    when: on_failure
+    paths:
+      - src/app/Backend/target/surefire-reports/
+
 
 docker-backend:
   stage: docker
@@ -57,9 +62,15 @@ build-frontend:
 test-frontend:
   stage: test
   image: node:latest
+  before_script:
+    - apt-get update && apt-get install -y chromium chromium-driver
+    - export CHROME_BIN=/usr/bin/chromium
   script:
     - npm ci
     - npm run test -- --watch=false --browsers=ChromeHeadless
+  variables:
+    CHROME_BIN: /usr/bin/chromium
+
 
 docker-frontend:
   stage: docker
