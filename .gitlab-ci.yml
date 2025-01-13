@@ -67,7 +67,7 @@ test-frontend:
     - export CHROME_BIN=/usr/bin/chromium
   script:
     - npm ci
-    - npm run test -- --watch=false --browsers=ChromeHeadless
+    - npm run test -- --browsers=ChromeHeadlessCI
   variables:
     CHROME_BIN: /usr/bin/chromium
 
