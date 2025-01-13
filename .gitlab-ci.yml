@@ -60,16 +60,15 @@ build-frontend:
       - dist/
 
 test-frontend:
-  stage: test
-  image: node:latest
+  image: node:18  # Utilisez une version LTS stable de Node
   before_script:
-    - apt-get update && apt-get install -y chromium chromium-driver
-    - export CHROME_BIN=/usr/bin/chromium
+    - apt-get update
+    - apt-get install -y chromium chromium-driver
+    - npm install -g @angular/cli
+    - npm install karma-chrome-launcher --save-dev
+    - npm install
   script:
-    - npm ci
-    - npm run test -- --browsers=ChromeHeadlessCI
-  variables:
-    CHROME_BIN: /usr/bin/chromium
+    - ng test --no-watch --browsers=ChromiumHeadless
 
 
 docker-frontend:
