@@ -62,18 +62,21 @@ build-frontend:
 test-frontend:
   image: cypress/base:latest
   variables:
-    CHROME_BIN: /usr/bin/chromium-browser
+    CHROME_BIN: /usr/bin/chromium
   script:
-    - chromium-browser --version  # Vérifie la version de Chromium
+    - apt-get update && apt-get install -y chromium
+    - chromium --version  # Vérifie la version de Chromium
     - mkdir -p projects/module/src
     - touch projects/module/src/styles.css
     - npm install
     - npm run test:ci
+    - ls /usr/bin | grep chromium
   artifacts:
     when: always
     reports:
       junit:
         - junit.xml
+
 
 
 docker-frontend:
