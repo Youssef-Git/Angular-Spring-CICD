@@ -25,20 +25,18 @@ module.exports = function(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: false,
-    browsers: ['ChromiumHeadless'],
+    browsers: ['ChromiumHeadlessCI'],
     singleRun: true,
     restartOnFileChange: false,
-    failOnEmptyTestSuite: false,
     customLaunchers: {
-      ChromiumHeadless: {
+      ChromiumHeadlessCI: {
         base: 'ChromiumHeadless',
         flags: [
           '--no-sandbox',
           '--headless',
           '--disable-gpu',
           '--disable-dev-shm-usage',
-          '--disable-web-security',
-          '--disable-software-rasterizer'
+          '--disable-web-security'
         ]
       }
     }

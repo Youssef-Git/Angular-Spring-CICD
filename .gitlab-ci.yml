@@ -69,6 +69,7 @@ test-frontend:
     - npm run test:ci
   variables:
     CHROME_BIN: /usr/bin/chromium
+    CHROME_PATH: /usr/bin/chromium
 
 
 docker-frontend:
