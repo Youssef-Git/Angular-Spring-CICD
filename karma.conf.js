@@ -1,4 +1,4 @@
-module.exports = function (config) {
+module.exports = function(config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
@@ -10,8 +10,6 @@ module.exports = function (config) {
       require('@angular-devkit/build-angular/plugins/karma')
     ],
     client: {
-      jasmine: {
-      },
       clearContext: false
     },
     coverageReporter: {
@@ -23,8 +21,26 @@ module.exports = function (config) {
       ]
     },
     reporters: ['progress', 'kjhtml'],
+    port: 9876,
+    colors: true,
+    logLevel: config.LOG_INFO,
+    autoWatch: false,
     browsers: ['ChromiumHeadless'],
-    restartOnFileChange: true,
-    singleRun: false
+    singleRun: true,
+    restartOnFileChange: false,
+    failOnEmptyTestSuite: false,
+    customLaunchers: {
+      ChromiumHeadless: {
+        base: 'ChromiumHeadless',
+        flags: [
+          '--no-sandbox',
+          '--headless',
+          '--disable-gpu',
+          '--disable-dev-shm-usage',
+          '--disable-web-security',
+          '--disable-software-rasterizer'
+        ]
+      }
+    }
   });
 };

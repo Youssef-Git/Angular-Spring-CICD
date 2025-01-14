@@ -60,10 +60,19 @@ build-frontend:
       - dist/
 
 test-frontend:
-  image: trion/ng-cli-karma:latest
+  image: trion/ng-cli-karma
+  variables:
+    CHROME_BIN: /usr/bin/chromium-browser
   script:
+    - mkdir -p projects/module/src
+    - touch projects/module/src/styles.css
     - npm install
-    - ng test --no-watch --no-progress --browsers=ChromiumHeadless --source-map=false
+    - npm run test -- --no-watch --no-progress --browsers=ChromiumHeadless --karmaConfig=karma.conf.js
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - junit.xml
 
 
 docker-frontend:
