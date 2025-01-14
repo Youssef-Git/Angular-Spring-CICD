@@ -64,7 +64,8 @@ test-frontend:
   variables:
     CHROME_BIN: /usr/bin/chromium
   script:
-    - npm install @angular/cli
+    - npm install @angular/cli --save-dev
+    - ls -la node_modules/.bin
     - npx ng version
     - npm install
     - npm run test:ci
