@@ -64,10 +64,11 @@ test-frontend:
   variables:
     CHROME_BIN: /usr/bin/chromium-browser
   script:
+    - apt-get update && apt-get install -y chromium-browser
     - mkdir -p projects/module/src
     - touch projects/module/src/styles.css
     - npm install
-    - npm run test -- --no-watch --no-progress --browsers=ChromiumHeadless --karmaConfig=karma.conf.js
+    - npm run test:ci
   artifacts:
     when: always
     reports:
