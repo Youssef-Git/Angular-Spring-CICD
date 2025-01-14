@@ -67,7 +67,7 @@ test-frontend:
     - mkdir -p projects/module/src
     - touch projects/module/src/styles.css
     - npm install
-    - npm run test -- --no-watch --no-progress --browsers=ChromiumHeadless --karmaConfig=karma.conf.js
+    - npm run test -- --no-watch --no-progress --browsers=ChromiumHeadless
   artifacts:
     when: always
     reports:
