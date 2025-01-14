@@ -62,9 +62,9 @@ build-frontend:
 test-frontend:
   image: trion/ng-cli-karma
   variables:
-    CHROME_BIN: /usr/bin/chromium-browser
+    CHROME_BIN: /usr/bin/chromium
   script:
-    - apt-get update && apt-get install -y chromium-browser
+    - apt-get update && apt-get install -y chromium
     - mkdir -p projects/module/src
     - touch projects/module/src/styles.css
     - npm install
