@@ -29,14 +29,12 @@
                 "input": "public"
               }
             ],
-
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/bootstrap/scss/bootstrap.scss",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
-
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
@@ -97,6 +95,13 @@
             ],
             "styles": ["src/styles.css"],
             "scripts": []
+          },
+          "configurations": {
+            "ci": {
+              "watch": false,
+              "progress": false,
+              "browsers": ["ChromiumHeadless"]
+            }
           }
         }
       }
@@ -186,7 +191,13 @@
               "projects/module/src/styles.css"
             ],
             "scripts": []
-            
+          },
+          "configurations": {
+            "ci": {
+              "watch": false,
+              "progress": false,
+              "browsers": ["ChromiumHeadless"]
+            }
           }
         }
       }
