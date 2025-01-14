@@ -60,13 +60,11 @@ build-frontend:
       - dist/
 
 test-frontend:
-  image: trion/ng-cli-karma
+  image: cypress/base:latest
   variables:
     CHROME_BIN: /usr/bin/chromium-browser
   script:
-    - apt-get update && apt-get install -y chromium-browser
     - chromium-browser --version  # Vérifie la version de Chromium
-    - which chromium-browser  # Vérifie que le binaire est bien accessible
     - mkdir -p projects/module/src
     - touch projects/module/src/styles.css
     - npm install
