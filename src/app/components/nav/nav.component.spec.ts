@@ -10,17 +10,27 @@ describe('NavComponent', () => {
   let component: NavComponent;
   let fixture: ComponentFixture<NavComponent>;
   let router: Router;
-  let authService: AuthService;
+  let authService: jasmine.SpyObj<AuthService>;
 
   beforeEach(async () => {
+    const authServiceSpy = jasmine.createSpyObj('AuthService', ['logOut']);
+    
     await TestBed.configureTestingModule({
-      imports: [NavComponent, RouterTestingModule, HttpClientTestingModule, ToastrModule.forRoot()],
+      imports: [
+        NavComponent, 
+        RouterTestingModule, 
+        HttpClientTestingModule, 
+        ToastrModule.forRoot()
+      ],
+      providers: [
+        { provide: AuthService, useValue: authServiceSpy }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(NavComponent);
     component = fixture.componentInstance;
     router = TestBed.inject(Router);
-    
+    authService = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
     fixture.detectChanges();
   });
 
@@ -61,15 +71,10 @@ describe('NavComponent', () => {
   });
 
   describe('loggedOut()', () => {
-  
-    beforeEach(() => {
-      authService = TestBed.inject(AuthService);
-      spyOn(authService, 'logOut');
-    });
-  
     it('should call auth.logOut()', () => {
       component.loggedOut();
       expect(authService.logOut).toHaveBeenCalled();
     });
   });
 });
+
