@@ -64,6 +64,7 @@ test-frontend:
   variables:
     CHROME_BIN: /usr/bin/chromium
   script:
+    - npm install -g @angular/cli
     - npm install
     - npm run test:ci
   artifacts:
