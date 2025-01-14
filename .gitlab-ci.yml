@@ -60,13 +60,10 @@ build-frontend:
       - dist/
 
 test-frontend:
-  image: cypress/base:latest
+  image: browserless/chrome:latest
   variables:
-    CHROME_BIN: /usr/bin/chromium-browser
+    CHROME_BIN: /usr/bin/chromium
   script:
-    - chromium-browser --version  # Vérifie la version de Chromium
-    - mkdir -p projects/module/src
-    - touch projects/module/src/styles.css
     - npm install
     - npm run test:ci
   artifacts:
