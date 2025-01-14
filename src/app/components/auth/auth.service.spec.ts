@@ -19,13 +19,13 @@ describe('AuthService', () => {
       ],
       providers: [AuthService]
     });
-
     service = TestBed.inject(AuthService);
     toastrService = TestBed.inject(ToastrService);
     router = TestBed.inject(Router);
-
+    
     spyOn(localStorage, 'setItem');
     spyOn(localStorage, 'removeItem');
+    spyOn(localStorage, 'getItem');
     spyOn(toastrService, 'success');
     spyOn(router, 'navigate');
   });
@@ -35,10 +35,9 @@ describe('AuthService', () => {
   });
 
   it('should toggle isSignUp when switchToLogin is called', () => {
-    service['isSignUp'] = false; 
+    service['isSignUp'] = false;
     service.switchToLogin();
     expect(service['isSignUp']).toBeTrue();
-
     service.switchToLogin();
     expect(service['isSignUp']).toBeFalse();
   });
@@ -47,7 +46,6 @@ describe('AuthService', () => {
     service['isSignUp'] = true;
     service.switchToSignIn();
     expect(service['isSignUp']).toBeFalse();
-
     service.switchToSignIn();
     expect(service['isSignUp']).toBeTrue();
   });
@@ -62,5 +60,37 @@ describe('AuthService', () => {
     expect(localStorage.removeItem).toHaveBeenCalledWith('token');
     expect(toastrService.success).toHaveBeenCalledWith('Vous êtes déconnecté');
     expect(router.navigate).toHaveBeenCalledWith(['/login']);
+  });
+
+  describe('getNom', () => {
+    it('should get nom from localStorage', () => {
+      (localStorage.getItem as jasmine.Spy).and.returnValue('Test User');
+      const result = service.getNom();
+      expect(localStorage.getItem).toHaveBeenCalledWith('nom');
+      expect(result).toBe('Test User');
+    });
+
+    it('should return null if nom is not in localStorage', () => {
+      (localStorage.getItem as jasmine.Spy).and.returnValue(null);
+      const result = service.getNom();
+      expect(localStorage.getItem).toHaveBeenCalledWith('nom');
+      expect(result).toBeNull();
+    });
+  });
+
+  describe('getRole', () => {
+    it('should get role from localStorage', () => {
+      (localStorage.getItem as jasmine.Spy).and.returnValue('Administrateur');
+      const result = service.getRole();
+      expect(localStorage.getItem).toHaveBeenCalledWith('role');
+      expect(result).toBe('Administrateur');
+    });
+
+    it('should return null if role is not in localStorage', () => {
+      (localStorage.getItem as jasmine.Spy).and.returnValue(null);
+      const result = service.getRole();
+      expect(localStorage.getItem).toHaveBeenCalledWith('role');
+      expect(result).toBeNull();
+    });
   });
 });

@@ -5,6 +5,7 @@ import { ObservateurComponent } from './observateur.component';
 import { AppService } from '../../services/app.service';
 import { AuthService } from '../../auth/auth.service';
 import { of, throwError } from 'rxjs';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('ObservateurComponent', () => {
   let component: ObservateurComponent;
@@ -14,20 +15,25 @@ describe('ObservateurComponent', () => {
 
   beforeEach(async () => {
     const appServiceSpy = jasmine.createSpyObj('AppService', ['getProjects', 'onClickVoirHistorique']);
-    const authServiceSpy = jasmine.createSpyObj('AuthService', ['getUserNom', 'getUserRole']); // Modifié ici
+    const authServiceSpy = jasmine.createSpyObj('AuthService', ['getNom', 'getRole']);
     
-    authServiceSpy.getUserNom.and.returnValue('Test User');
-    authServiceSpy.getUserRole.and.returnValue('Observateur');
+    authServiceSpy.getNom.and.returnValue('Test User');
+    authServiceSpy.getRole.and.returnValue('Observateur');
+    appServiceSpy.getProjects.and.returnValue(of([
+      { id: 1, name: 'Project 1' },
+      { id: 2, name: 'Project 2' }
+    ]));
 
     await TestBed.configureTestingModule({
       imports: [
-        ObservateurComponent, 
-        HttpClientTestingModule, 
-        ToastrModule.forRoot()
+        ObservateurComponent,
+        HttpClientTestingModule,
+        ToastrModule.forRoot(),
+        FontAwesomeModule
       ],
       providers: [
         { provide: AppService, useValue: appServiceSpy },
-        { provide: AuthService, useValue: authServiceSpy } // Modifié ici
+        { provide: AuthService, useValue: authServiceSpy }
       ]
     }).compileComponents();
 
@@ -35,6 +41,7 @@ describe('ObservateurComponent', () => {
     component = fixture.componentInstance;
     appService = TestBed.inject(AppService) as jasmine.SpyObj<AppService>;
     authService = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
+
     fixture.detectChanges();
   });
 
@@ -59,7 +66,6 @@ describe('ObservateurComponent', () => {
 
   describe('userNom and userRole', () => {
     it('should get userNom and userRole from authService', () => {
-      component.ngOnInit(); // Ajouté ici pour s'assurer que les valeurs sont initialisées
       expect(component.userNom).toBe('Test User');
       expect(component.userRole).toBe('Observateur');
     });
@@ -67,7 +73,10 @@ describe('ObservateurComponent', () => {
 
   describe('getProjects()', () => {
     it('should call appService.getProjects() and set projectList', () => {
-      const fakeProjects = [{ id: 1, name: 'Project 1' }, { id: 2, name: 'Project 2' }];
+      const fakeProjects = [
+        { id: 1, name: 'Project 1' },
+        { id: 2, name: 'Project 2' }
+      ];
       appService.getProjects.and.returnValue(of(fakeProjects));
       component.getProjects();
       expect(appService.getProjects).toHaveBeenCalled();

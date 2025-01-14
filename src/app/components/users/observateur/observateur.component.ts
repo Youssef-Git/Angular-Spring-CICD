@@ -15,9 +15,7 @@ import { AuthService } from '../../auth/auth.service';
   providers: [AppService, AuthService],
 })
 export class ObservateurComponent implements OnInit {
-
   faUser = faUser;
-
   projectList: any[] = [];
 
   constructor(
@@ -25,14 +23,14 @@ export class ObservateurComponent implements OnInit {
     private appService: AppService,
     private authService: AuthService
   ) {}
-  // Methode permettant d'afficher les historiques
 
   onClickVoirHistorique() {
     this.appService.onClickVoirHistorique()
   }
-  //Récupération du nom de l'utilisateur connecté depuis le LocalStorage.
+
   userNom = this.authService.getNom();
   userRole = this.authService.getRole();
+
   ngOnInit(): void {
     this.getProjects();
   }
