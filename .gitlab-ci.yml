@@ -60,20 +60,25 @@ build-frontend:
       - dist/
 
 test-frontend:
-  image: browserless/chrome:latest
+  image: node:18-bullseye
   variables:
-    CHROME_BIN: /usr/bin/chromium
-  script:
+    CHROME_BIN: "/usr/bin/google-chrome-stable"
+  before_script:
+    - apt-get update && apt-get install -y wget gnupg
+    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+    - echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
+    - apt-get update && apt-get install -y google-chrome-stable
+    - npm ci
     - npm install @angular/cli --save-dev
-    - ls -la node_modules/.bin
+  script:
     - npx ng version
-    - npm install
-    - npm run test:ci
+    - npx ng test --no-watch --no-progress --browsers=ChromeHeadless --code-coverage
   artifacts:
-    when: always
+    paths:
+      - coverage/
     reports:
       junit:
-        - junit.xml
+        - coverage/junit.xml
 
 
 docker-frontend:
