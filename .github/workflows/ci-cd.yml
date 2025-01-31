@@ -11,6 +11,7 @@ env:
   GOOGLE_COMPUTE_ZONE: "europe-west1-b"
   SPRING_IMAGE_NAME: "gcr.io/peak-lattice-447302-b9/spring-backend"
   ANGULAR_IMAGE_NAME: "gcr.io/peak-lattice-447302-b9/angular-frontend"
+  #u remind me other girl
 
 jobs:
   build-backend:
