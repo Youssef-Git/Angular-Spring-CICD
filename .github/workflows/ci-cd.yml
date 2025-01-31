@@ -125,19 +125,15 @@ jobs:
           name: backend-jar
           path: src/app/Backend/target/
           
-      - name: Authenticate to Google Cloud
-        id: auth
-        uses: google-github-actions/auth@v2
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
         with:
-          credentials_json: '${{ secrets.GCP_KEY }}'
-          token_format: 'access_token'
-          
-      - name: Login to Artifact Registry
-        uses: docker/login-action@v3
-        with:
-          registry: gcr.io
-          username: oauth2accesstoken
-          password: ${{ steps.auth.outputs.access_token }}
+          project_id: ${{ env.GOOGLE_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_KEY }}
+
+      - name: Configure docker auth
+        run: |
+          gcloud auth configure-docker gcr.io --quiet
           
       - name: Build and push
         run: |
