@@ -1,0 +1,178 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  GOOGLE_PROJECT_ID: peak-lattice-447302-b9
+  GOOGLE_COMPUTE_ZONE: europe-west1-b
+  SPRING_IMAGE_NAME: gcr.io/${{ env.GOOGLE_PROJECT_ID }}/spring-backend:${{ github.sha }}
+  ANGULAR_IMAGE_NAME: gcr.io/${{ env.GOOGLE_PROJECT_ID }}/angular-frontend:${{ github.sha }}
+
+jobs:
+  build-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up JDK 18
+        uses: actions/setup-java@v4
+        with:
+          java-version: '18'
+          distribution: 'adopt'
+          cache: 'maven'
+      
+      - name: Build with Maven
+        run: |
+          cd src/app/Backend
+          mvn clean package -DskipTests
+      
+      - name: Upload JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-jar
+          path: src/app/Backend/target/*.jar
+
+  test-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up JDK 18
+        uses: actions/setup-java@v4
+        with:
+          java-version: '18'
+          distribution: 'adopt'
+          cache: 'maven'
+      
+      - name: Test with Maven
+        run: |
+          cd src/app/Backend
+          mvn test -X
+      
+      - name: Upload Test Reports
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: src/app/Backend/target/surefire-reports/
+
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build
+        run: npm run build --configuration=production
+      
+      - name: Upload dist
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: dist/
+
+  test-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+          cache: 'npm'
+      
+      - name: Prepare environment
+        run: |
+          mkdir -p projects/module/src
+          touch projects/module/src/styles.css
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Run tests
+        run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
+      
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: junit.xml
+
+  docker-backend:
+    needs: [build-backend, test-backend]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ env.GOOGLE_PROJECT_ID }}
+          service_account_key: ${{ secrets.GOOGLE_CLOUD_KEY }}
+      
+      - name: Configure Docker
+        run: gcloud auth configure-docker
+      
+      - name: Build and push
+        run: |
+          cd docker/backend
+          docker build -t ${{ env.SPRING_IMAGE_NAME }} .
+          docker push ${{ env.SPRING_IMAGE_NAME }}
+
+  docker-frontend:
+    needs: [build-frontend, test-frontend]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ env.GOOGLE_PROJECT_ID }}
+          service_account_key: ${{ secrets.GOOGLE_CLOUD_KEY }}
+      
+      - name: Configure Docker
+        run: gcloud auth configure-docker
+      
+      - name: Build and push
+        run: |
+          cd docker/frontend
+          docker build -t ${{ env.ANGULAR_IMAGE_NAME }} .
+          docker push ${{ env.ANGULAR_IMAGE_NAME }}
+
+  deploy:
+    needs: [docker-backend, docker-frontend]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ env.GOOGLE_PROJECT_ID }}
+          service_account_key: ${{ secrets.GOOGLE_CLOUD_KEY }}
+      
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy spring-backend \
+            --image ${{ env.SPRING_IMAGE_NAME }} \
+            --platform managed \
+            --region europe-west1 \
+            --allow-unauthenticated
+          
+          gcloud run deploy angular-frontend \
+            --image ${{ env.ANGULAR_IMAGE_NAME }} \
+            --platform managed \
+            --region europe-west1 \
+            --allow-unauthenticated
