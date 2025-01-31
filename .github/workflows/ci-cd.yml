@@ -9,8 +9,8 @@ on:
 env:
   GOOGLE_PROJECT_ID: peak-lattice-447302-b9
   GOOGLE_COMPUTE_ZONE: europe-west1-b
-  SPRING_IMAGE_NAME: gcr.io/${{ env.GOOGLE_PROJECT_ID }}/spring-backend:${{ github.sha }}
-  ANGULAR_IMAGE_NAME: gcr.io/${{ env.GOOGLE_PROJECT_ID }}/angular-frontend:${{ github.sha }}
+  SPRING_IMAGE_NAME: gcr.io/peak-lattice-447302-b9/spring-backend:${{ github.sha }}
+  ANGULAR_IMAGE_NAME: gcr.io/peak-lattice-447302-b9/angular-frontend:${{ github.sha }}
 
 jobs:
   build-backend:
