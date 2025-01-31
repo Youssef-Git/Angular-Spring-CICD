@@ -128,7 +128,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ env.GOOGLE_PROJECT_ID }}
-          service_account_key: ${{ secrets.GOOGLE_CLOUD_KEY }}
+          service_account_key: ${{ secrets.GCP_KEY }}
       
       - name: Configure Docker
         run: gcloud auth configure-docker
@@ -149,7 +149,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ env.GOOGLE_PROJECT_ID }}
-          service_account_key: ${{ secrets.GOOGLE_CLOUD_KEY }}
+          service_account_key: ${{ secrets.GCP_KEY }}
       
       - name: Configure Docker
         run: gcloud auth configure-docker
@@ -168,7 +168,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ env.GOOGLE_PROJECT_ID }}
-          service_account_key: ${{ secrets.GOOGLE_CLOUD_KEY }}
+          service_account_key: ${{ secrets.GCP_KEY }}
       
       - name: Deploy to Cloud Run
         run: |
