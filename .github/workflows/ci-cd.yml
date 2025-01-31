@@ -8,10 +8,9 @@ on:
 
 env:
   GOOGLE_PROJECT_ID: "peak-lattice-447302-b9"
-  GOOGLE_COMPUTE_ZONE: "europe-west1"
-  SPRING_IMAGE_NAME: "gcr.io/peak-lattice-447302-b9/spring-backend"
-  ANGULAR_IMAGE_NAME: "gcr.io/peak-lattice-447302-b9/angular-frontend"
-  #u remind me other girl
+  GOOGLE_COMPUTE_ZONE: "europe-west1-b"
+  SPRING_IMAGE_NAME: "europe-west1-docker.pkg.dev/peak-lattice-447302-b9/docker-repo/spring-backend"
+  ANGULAR_IMAGE_NAME: "europe-west1-docker.pkg.dev/peak-lattice-447302-b9/docker-repo/angular-frontend"
 
 jobs:
   build-backend:
@@ -134,7 +133,7 @@ jobs:
 
       - name: Configure docker auth
         run: |
-          gcloud auth configure-docker gcr.io --quiet
+          gcloud auth configure-docker europe-west1-docker.pkg.dev --quiet
           
       - name: Build and push
         run: |
