@@ -99,7 +99,10 @@ jobs:
           mkdir -p src/assets
           
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          npm install -D karma-junit-reporter
+          npm install -D karma-jasmine karma-chrome-launcher karma-jasmine-html-reporter karma-coverage
         
       - name: Run tests
         run: |
