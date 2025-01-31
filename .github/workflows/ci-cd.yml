@@ -117,6 +117,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
+      - name: Download backend artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: backend-jar
+          path: src/app/Backend/target/
+      
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
         with:
@@ -128,8 +134,8 @@ jobs:
       
       - name: Build and push
         run: |
-          cd docker/backend
-          docker build -t ${{ env.SPRING_IMAGE_NAME }} .
+          # On se place à la racine du projet pour que les chemins relatifs fonctionnent
+          docker build -t ${{ env.SPRING_IMAGE_NAME }} -f docker/backend/Dockerfile .
           docker push ${{ env.SPRING_IMAGE_NAME }}
 
   docker-frontend:
