@@ -11,7 +11,7 @@ env:
   GOOGLE_COMPUTE_ZONE: "europe-west1-b"
   SPRING_IMAGE_NAME: "europe-west1-docker.pkg.dev/peak-lattice-447302-b9/docker-registry/spring-backend"
   ANGULAR_IMAGE_NAME: "europe-west1-docker.pkg.dev/peak-lattice-447302-b9/docker-registry/angular-frontend"
-  #jjhh
+
 jobs:
   build-backend:
     runs-on: ubuntu-latest
@@ -71,8 +71,14 @@ jobs:
           node-version: '18'
           cache: 'npm'
       
+      - name: Clear npm cache
+        run: npm cache clean --force
+        
+      - name: Remove package-lock.json
+        run: rm -f package-lock.json
+      
       - name: Install dependencies
-        run: npm ci
+        run: npm install
       
       - name: Build
         run: npm run build --configuration=production
@@ -94,23 +100,14 @@ jobs:
           node-version: '18'
           cache: 'npm'
       
-      - name: Create test environment
-        run: |
-          mkdir -p src/assets
-          
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        
       - name: Install dependencies
-        run: |
-          npm ci
-          npm install -D karma-junit-reporter
-          npm install -D karma-jasmine karma-chrome-launcher karma-jasmine-html-reporter karma-coverage
+        run: npm ci
         
       - name: Run tests
-        run: |
-          npm run test -- \
-            --no-watch \
-            --no-progress \
-            --browsers=ChromeHeadless \
-            --karma-config=karma.conf.js
+        run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
 
   docker-backend:
     needs: [build-backend, test-backend]
