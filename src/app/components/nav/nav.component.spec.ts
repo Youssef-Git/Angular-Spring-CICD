@@ -1,63 +1,42 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NavComponent } from './nav.component';
-import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { NavComponent } from './nav.component';
 import { AuthService } from '../auth/auth.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 describe('NavComponent', () => {
   let component: NavComponent;
   let fixture: ComponentFixture<NavComponent>;
-  let router: Router;
   let authService: jasmine.SpyObj<AuthService>;
-  let toastrService: jasmine.SpyObj<ToastrService>;
+  let router: Router;
 
   beforeEach(async () => {
-    const authServiceSpy = jasmine.createSpyObj('AuthService', ['logOut', 'getNom', 'getRole']);
-    const toastrServiceSpy = jasmine.createSpyObj('ToastrService', ['success']);
+    const authSpy = jasmine.createSpyObj('AuthService', ['logOut']);
     
     await TestBed.configureTestingModule({
       imports: [
-        NavComponent,
-        RouterTestingModule,
-        HttpClientTestingModule,
-        ToastrModule.forRoot()
+        RouterTestingModule
       ],
+      declarations: [ NavComponent ],
       providers: [
-        { provide: AuthService, useValue: authServiceSpy },
-        { provide: ToastrService, useValue: toastrServiceSpy }
+        { provide: AuthService, useValue: authSpy }
       ]
     }).compileComponents();
 
+    authService = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
+    router = TestBed.inject(Router);
     fixture = TestBed.createComponent(NavComponent);
     component = fixture.componentInstance;
-    router = TestBed.inject(Router);
-    authService = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
-    toastrService = TestBed.inject(ToastrService) as jasmine.SpyObj<ToastrService>;
-
-    // Mock localStorage
-    spyOn(localStorage, 'getItem').and.returnValue('Administrateur');
-    spyOn(localStorage, 'removeItem');
-    spyOn(router, 'navigate');
-
-    // Ne pas configurer le comportement de logOut ici
-    // Laissez-le comme un simple spy
-    
     fixture.detectChanges();
   });
 
-  // ... autres tests ...
-
-  describe('loggedOut()', () => {
-    it('should call auth.logOut()', () => {
-      // Act
-      component.loggedOut();
-
-      // Assert
-      expect(authService.logOut).toHaveBeenCalled();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 
-  // ... autres tests ...
+  it('should call auth.logOut()', () => {
+    spyOn(router, 'navigate');
+    component.loggedOut();
+    expect(authService.logOut).toHaveBeenCalled();
+  });
 });
