@@ -108,8 +108,23 @@ jobs:
           npm install
           npm install karma-junit-reporter@2.0.1 xmlbuilder@12.0.0
         
+      - name: Create test environment configuration
+        run: |
+          cat > src/environments/environment.test.ts << EOL
+          export const environment = {
+            production: false,
+            apiUrl: 'http://mock-api'
+          };
+          EOL
+        
       - name: Run tests
-        run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
+        run: |
+          export NODE_ENV=test
+          npm run test -- \
+            --no-watch \
+            --no-progress \
+            --browsers=ChromeHeadless \
+            --karma-config=karma.conf.js
 
   docker-backend:
     needs: [build-backend, test-backend]
