@@ -222,7 +222,7 @@ jobs:
             --platform managed \
             --region europe-west1 \
             --allow-unauthenticated \
-            --set-env-vars=PORT=8080,SPRING_PROFILES_ACTIVE=prod
+            --set-env-vars=SPRING_PROFILES_ACTIVE=prod
             
           gcloud run deploy angular-frontend \
             --image ${{ env.ANGULAR_IMAGE_NAME }}:${{ github.sha }} \
