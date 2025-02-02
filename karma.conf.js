@@ -35,10 +35,8 @@ module.exports = function (config) {
     browsers: ['ChromeHeadless'],
     singleRun: true,
     restartOnFileChange: false,
-    // Configuration pour les assets
     files: [
-      { pattern: 'src/assets/**/*', watched: false, included: false, served: true },
-      { pattern: 'src/environments/environment.spec.ts', watched: false, included: true }
+      { pattern: 'src/assets/**/*', watched: false, included: false, served: true }
     ],
     proxies: {
       '/assets/': '/base/src/assets/'

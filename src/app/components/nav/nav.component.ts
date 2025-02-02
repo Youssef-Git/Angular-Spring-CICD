@@ -1,27 +1,25 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
+import { CommonModule } from '@angular/common';  // Ajoutez cette ligne
 
 @Component({
   selector: 'app-nav',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],  // Ajoutez CommonModule
   templateUrl: './nav.component.html',
-  styleUrl: './nav.component.css',
-  providers: [AuthService],
+  styleUrl: './nav.component.css'
+  // Retirez providers: [AuthService]
 })
 export class NavComponent {
   ImgLogo = 'assets/logo-vignette.png';
-
   constructor(private router: Router, private auth: AuthService) {}
-
   userRole: string | null = '';
+
   ngOnInit(): void {
     this.userRole = localStorage.getItem('role');
   }
 
-
-   // Methode de rédirection des utilisateurs vers leurs routes spécifiques serlon leurs rôle.
   onClickMonCompt() {
     if (this.userRole == 'Administrateur') {
       this.router.navigate(['/admin']);
@@ -34,7 +32,6 @@ export class NavComponent {
     }
   }
 
-  // Methode de déconnection
   loggedOut() {
     this.auth.logOut();
   }

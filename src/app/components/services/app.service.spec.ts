@@ -3,11 +3,13 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 import { AppService } from './app.service';
+import { environment } from '../../../environments/environment';
 
 describe('AppService', () => {
   let service: AppService;
   let httpMock: HttpTestingController;
   let router: Router;
+  const baseUrl = environment.apiUrl;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -37,7 +39,7 @@ describe('AppService', () => {
         expect(projects).toEqual(mockProjects);
       });
 
-      const req = httpMock.expectOne('http://localhost:8081/projet');
+      const req = httpMock.expectOne(`${baseUrl}/projet`);
       expect(req.request.method).toBe('GET');
       req.flush(mockProjects);
     });
@@ -49,7 +51,7 @@ describe('AppService', () => {
         expect(project).toEqual(mockProject);
       });
 
-      const req = httpMock.expectOne('http://localhost:8081/projet/1');
+      const req = httpMock.expectOne(`${baseUrl}/projet/1`);
       expect(req.request.method).toBe('GET');
       req.flush(mockProject);
     });
@@ -61,7 +63,7 @@ describe('AppService', () => {
         expect(project).toEqual(mockProject);
       });
 
-      const req = httpMock.expectOne('http://localhost:8081/projet');
+      const req = httpMock.expectOne(`${baseUrl}/projet`);
       expect(req.request.method).toBe('POST');
       req.flush(mockProject);
     });
@@ -73,7 +75,7 @@ describe('AppService', () => {
         expect(project).toEqual(mockProject);
       });
 
-      const req = httpMock.expectOne('http://localhost:8081/projet/1');
+      const req = httpMock.expectOne(`${baseUrl}/projet/1`);
       expect(req.request.method).toBe('PUT');
       req.flush(mockProject);
     });
@@ -81,7 +83,7 @@ describe('AppService', () => {
     it('should delete project', () => {
       service.deleteProject(1).subscribe();
 
-      const req = httpMock.expectOne('http://localhost:8081/projet/1');
+      const req = httpMock.expectOne(`${baseUrl}/projet/1`);
       expect(req.request.method).toBe('DELETE');
       req.flush(null);
     });
@@ -98,7 +100,7 @@ describe('AppService', () => {
         expect(users).toEqual(mockUsers);
       });
 
-      const req = httpMock.expectOne('http://localhost:8081/utilisateur');
+      const req = httpMock.expectOne(`${baseUrl}/utilisateur`);
       expect(req.request.method).toBe('GET');
       req.flush(mockUsers);
     });
@@ -111,7 +113,7 @@ describe('AppService', () => {
         expect(user).toEqual(mockUser);
       });
 
-      const req = httpMock.expectOne('http://localhost:8081/utilisateur/1');
+      const req = httpMock.expectOne(`${baseUrl}/utilisateur/1`);
       expect(req.request.method).toBe('GET');
       req.flush(mockUser);
     });
@@ -123,7 +125,7 @@ describe('AppService', () => {
         expect(user).toEqual(mockUser);
       });
 
-      const req = httpMock.expectOne('http://localhost:8081/utilisateur');
+      const req = httpMock.expectOne(`${baseUrl}/utilisateur`);
       expect(req.request.method).toBe('POST');
       req.flush(mockUser);
     });
@@ -146,7 +148,7 @@ describe('AppService', () => {
         expect(history).toEqual(mockHistory);
       });
 
-      const req = httpMock.expectOne('http://localhost:8081/historique');
+      const req = httpMock.expectOne(`${baseUrl}/historique`);
       expect(req.request.method).toBe('GET');
       req.flush(mockHistory);
     });
@@ -154,7 +156,7 @@ describe('AppService', () => {
     it('should log action', () => {
       service.logAction('test', 'user', 'admin');
 
-      const req = httpMock.expectOne('http://localhost:8081/historique');
+      const req = httpMock.expectOne(`${baseUrl}/historique`);
       expect(req.request.method).toBe('POST');
       expect(req.request.body.action).toBe('test');
       expect(req.request.body.username).toBe('user');
