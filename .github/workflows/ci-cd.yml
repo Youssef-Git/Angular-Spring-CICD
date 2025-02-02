@@ -11,6 +11,7 @@ env:
   GOOGLE_COMPUTE_ZONE: "europe-west1-b"
   SPRING_IMAGE_NAME: "europe-west1-docker.pkg.dev/peak-lattice-447302-b9/docker-registry/spring-backend"
   ANGULAR_IMAGE_NAME: "europe-west1-docker.pkg.dev/peak-lattice-447302-b9/docker-registry/angular-frontend"
+  #test
 
 jobs:
   build-backend:

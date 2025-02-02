@@ -15,9 +15,9 @@ describe('NavComponent', () => {
     
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        NavComponent  // Déplacé de declarations vers imports car c'est un standalone
       ],
-      declarations: [ NavComponent ],
       providers: [
         { provide: AuthService, useValue: authSpy }
       ]
