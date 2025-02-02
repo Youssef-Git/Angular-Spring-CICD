@@ -11,7 +11,7 @@ module.exports = function (config) {
     ],
     client: {
       jasmine: {
-        random: false,  // Désactive l'exécution aléatoire des tests
+        random: false,
         failSpecWithNoExpectations: false
       },
       clearContext: false
@@ -35,16 +35,12 @@ module.exports = function (config) {
     browsers: ['ChromeHeadless'],
     singleRun: true,
     restartOnFileChange: false,
+    // Configuration pour les assets
     files: [
       { pattern: 'src/assets/**/*', watched: false, included: false, served: true }
     ],
     proxies: {
       '/assets/': '/base/src/assets/'
-    },
-    // Configuration pour les assets et les URLs
-    middleware: ['proxy'],
-    proxyRes: {
-      '/_karma_webpack_/assets/': '/base/src/assets/'
     }
   });
 };
