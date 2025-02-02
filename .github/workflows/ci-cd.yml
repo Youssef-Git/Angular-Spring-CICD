@@ -11,7 +11,6 @@ env:
   GOOGLE_COMPUTE_ZONE: "europe-west1-b"
   SPRING_IMAGE_NAME: "europe-west1-docker.pkg.dev/peak-lattice-447302-b9/docker-registry/spring-backend"
   ANGULAR_IMAGE_NAME: "europe-west1-docker.pkg.dev/peak-lattice-447302-b9/docker-registry/angular-frontend"
-  #test new test 
 
 jobs:
   build-backend:
@@ -143,7 +142,6 @@ jobs:
           name: backend-jar
           path: src/app/Backend/target/
       
-      # Authentification avec Google Cloud
       - name: Authenticate to Google Cloud
         id: auth
         uses: 'google-github-actions/auth@v2'
@@ -151,7 +149,6 @@ jobs:
           credentials_json: '${{ secrets.GCP_KEY }}'
           create_credentials_file: true
       
-      # Configuration spécifique pour Artifact Registry
       - name: Set up Cloud SDK
         uses: 'google-github-actions/setup-gcloud@v2'
       
@@ -185,22 +182,24 @@ jobs:
           
       - name: Authenticate to Google Cloud
         id: auth
-        uses: google-github-actions/auth@v2
+        uses: 'google-github-actions/auth@v2'
         with:
-            credentials_json: '${{ secrets.GCP_KEY }}'
-            create_credentials_file: true
-          
-      - name: Login to Artifact Registry
-        uses: docker/login-action@v3
-        with:
-          registry: gcr.io
-          username: oauth2accesstoken
-          password: ${{ steps.auth.outputs.access_token }}
-          
-      - name: Build and push
+          credentials_json: '${{ secrets.GCP_KEY }}'
+          create_credentials_file: true
+      
+      - name: Set up Cloud SDK
+        uses: 'google-github-actions/setup-gcloud@v2'
+      
+      - name: Configure Docker for Artifact Registry
         run: |
-          IMAGE_TAG="${{ env.ANGULAR_IMAGE_NAME }}:${{ github.sha }}"
+          gcloud auth configure-docker europe-west1-docker.pkg.dev --quiet
+      
+      - name: Build and Push Image
+        run: |
+          IMAGE_TAG="europe-west1-docker.pkg.dev/${{ env.GOOGLE_PROJECT_ID }}/docker-registry/angular-frontend:${{ github.sha }}"
+          echo "Building image: $IMAGE_TAG"
           docker build -t $IMAGE_TAG -f docker/frontend/Dockerfile .
+          echo "Pushing image to Artifact Registry..."
           docker push $IMAGE_TAG
 
   deploy:
@@ -229,3 +228,4 @@ jobs:
             --platform managed \
             --region europe-west1 \
             --allow-unauthenticated
+
