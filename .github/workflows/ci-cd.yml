@@ -222,7 +222,11 @@ jobs:
             --platform managed \
             --region europe-west1 \
             --allow-unauthenticated \
-            --set-env-vars=SPRING_PROFILES_ACTIVE=prod
+            --set-env-vars=SPRING_PROFILES_ACTIVE=prod \
+            --min-instances=1 \
+            --cpu=1 \
+            --memory=512Mi \
+            --timeout=300
             
           gcloud run deploy angular-frontend \
             --image ${{ env.ANGULAR_IMAGE_NAME }}:${{ github.sha }} \

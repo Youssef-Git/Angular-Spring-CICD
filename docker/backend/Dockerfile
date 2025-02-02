@@ -15,4 +15,5 @@ FROM amazoncorretto:17
 WORKDIR /app  
 COPY --from=build /build/target/*.jar app.jar  
 EXPOSE 8080
-ENTRYPOINT ["java", "-Dspring.profiles.active=prod", "-Dserver.port=8080", "-jar", "app.jar"]
+ENV JAVA_TOOL_OPTIONS="-XX:+ExitOnOutOfMemoryError"
+ENTRYPOINT ["sh", "-c", "echo 'Starting Spring Boot application on port ${PORT}' && java -Dserver.port=${PORT} -jar app.jar"]
