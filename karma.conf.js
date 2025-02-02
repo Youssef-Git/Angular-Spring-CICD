@@ -37,7 +37,8 @@ module.exports = function (config) {
     restartOnFileChange: false,
     // Configuration pour les assets
     files: [
-      { pattern: 'src/assets/**/*', watched: false, included: false, served: true }
+      { pattern: 'src/assets/**/*', watched: false, included: false, served: true },
+      { pattern: 'src/environments/environment.spec.ts', watched: false, included: true }
     ],
     proxies: {
       '/assets/': '/base/src/assets/'

@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { NavComponent } from './nav.component';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 describe('NavComponent', () => {
   let component: NavComponent;
@@ -16,7 +17,8 @@ describe('NavComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        NavComponent  // Déplacé de declarations vers imports car c'est un standalone
+        NavComponent,
+        ToastrModule.forRoot()  // Ajout du ToastrModule
       ],
       providers: [
         { provide: AuthService, useValue: authSpy }
