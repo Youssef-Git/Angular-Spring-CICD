@@ -26,5 +26,8 @@ COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist/pmt/browser /usr/share/nginx/html
 
 # Exposer le port 80 (ou tout autre port si nécessaire)
-EXPOSE 80
+EXPOSE 8080
+
+# Template pour remplacer le port dans nginx.conf
+CMD sed -i -e 's/$PORT/'"${PORT:-8080}"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
 
